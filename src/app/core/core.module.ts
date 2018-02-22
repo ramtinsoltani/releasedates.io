@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { CoreRouterModule } from '@routers';
 
@@ -26,7 +27,8 @@ import {
   ],
   imports: [
     CommonModule,
-    CoreRouterModule
+    CoreRouterModule,
+    FormsModule
   ],
   exports: [
     HeaderComponent,
