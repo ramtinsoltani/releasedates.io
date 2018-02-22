@@ -1,5 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# credentials
+/src/credentials.json
+
 # compiled output
 /dist
 /dist-server

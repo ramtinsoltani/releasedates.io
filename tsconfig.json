@@ -20,7 +20,8 @@
       "@modules": ["app/.aliases/modules"],
       "@components": ["app/.aliases/components"],
       "@routers": ["app/.aliases/routers"],
-      "@services": ["app/.aliases/services"]
+      "@services": ["app/.aliases/services"],
+      "@models": ["app/.aliases/models"]
     }
   }
 }
