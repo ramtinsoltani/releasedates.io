@@ -1,0 +1,16 @@
+export { HeaderComponent } from '../core/header/header.component';
+export { FooterComponent } from '../core/footer/footer.component';
+export { NotFoundComponent } from '../core/not-found/not-found.component';
+export { LoginComponent } from '../auth/login/login.component';
+export { RegisterComponent } from '../auth/register/register.component';
+export { HomeComponent } from '../home/home.component';
+export { PinsComponent } from '../home/pins/pins.component';
+export { RecentsComponent } from '../home/recents/recents.component';
+export { SummaryItemComponent } from '../home/summary-item/summary-item.component';
+export { SearchComponent } from '../search/search.component';
+export { ResultsListComponent } from '../search/results-list/results-list.component';
+export { ResultsItemComponent } from '../search/results-item/results-item.component';
+export { SeriesComponent } from '../series/series.component';
+export { SeriesDetailsComponent } from '../series/series-details/series-details.component';
+export { SeriesEpisodeComponent } from '../series/series-episode/series-episode.component';
+export { SeriesSeasonComponent } from '../series/series-season/series-season.component';
