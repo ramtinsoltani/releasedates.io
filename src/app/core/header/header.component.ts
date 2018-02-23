@@ -23,6 +23,8 @@ import { FirebaseUser } from '@models';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
+  private trapTriggered: boolean = false;
+
   public user: FirebaseUser = null;
   @ViewChild('detectTrap')
   public detectTrap: ElementRef;
@@ -42,7 +44,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
       this.user = user;
 
-      this.detectTrap.nativeElement.click();
+      if ( ! this.trapTriggered ) {
+
+        this.detectTrap.nativeElement.click();
+        this.trapTriggered = true;
+
+      }
 
     });
 
