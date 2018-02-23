@@ -1,30 +1,35 @@
-<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-  <div class="row w-100 align-items-center">
-    <div class="col-4">
-      <a routerLink="/" class="navbar-brand">
-        <img src="http://cohenwoodworking.com/wp-content/uploads/2016/09/image-placeholder-500x500.jpg" width="32" height="32" class="d-inline-block align-top mr-2">
-        ReleaseDates.io
-      </a>
-    </div>
-    <div class="col-4">
-      <form class="form-inline w-100">
-        <div class="input-group w-100">
-          <input type="text" class="form-control" placeholder="Search for TV Shows..." #textbox>
-          <div class="input-group-append">
-            <button class="btn btn-primary" (click)="onFind(textbox.value)" type="submit">Find</button>
+<header>
+  <nav class="navbar navbar-dark bg-dark navbar-expand-lg fixed-top">
+    <div class="row w-100 align-items-center">
+      <div class="col-4">
+        <a routerLink="/" class="navbar-brand">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.02 512" class="d-inline-block align-top mr-2" width="32" height="32">
+            <path d="M256,0C114.62,0,0,114.62,0,256S114.62,512,256,512A256,256,0,0,0,512,256C512,114.62,397.38,0,256,0Zm0,47.6a77.19,77.19,0,1,1-77.19,77.19A77.18,77.18,0,0,1,256,47.6ZM280.44,256A24.44,24.44,0,1,1,256,231.56,24.45,24.45,0,0,1,280.44,256ZM47.6,256a77.19,77.19,0,1,1,77.19,77.19A77.18,77.18,0,0,1,47.6,256ZM256,464.4a77.19,77.19,0,1,1,77.19-77.19A77.18,77.18,0,0,1,256,464.4ZM387.22,333.19A77.19,77.19,0,1,1,464.4,256,77.18,77.18,0,0,1,387.22,333.19Z" transform="translate(0 0)" style="fill:#fff"/>
+            <path d="M425,348c-21.55,57.4,8.64,121.73,67.52,143.84" transform="translate(0 0)" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-miterlimit:10;stroke-width:39px"/>
+          </svg>
+          ReleaseDates.io
+        </a>
+      </div>
+      <div class="col-4">
+        <form class="form-inline w-100">
+          <div class="input-group w-100">
+            <input type="text" class="form-control" placeholder="Search for TV Shows..." #textbox>
+            <div class="input-group-append">
+              <button class="btn btn-primary" (click)="onFind(textbox.value)" type="submit">Find</button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
+      <div class="col-4 collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a routerLink="/auth/login" routerLinkActive="active" class="nav-link">Login</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/auth/register" routerLinkActive="active" class="nav-link text-warning">Register</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="col-4 collapse navbar-collapse justify-content-end">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a routerLink="/auth/login" routerLinkActive="active" class="nav-link">Login</a>
-        </li>
-        <li class="nav-item">
-          <a routerLink="/auth/register" routerLinkActive="active" class="nav-link">Register</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+  </nav>
+</header>
