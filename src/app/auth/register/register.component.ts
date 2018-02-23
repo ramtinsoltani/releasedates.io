@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { AuthService } from '@services';
+
+import { FirebaseError } from '@models';
 
 @Component({
   selector: 'app-register',
@@ -7,9 +13,73 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  public firebaseErrorMessage: string;
+  public registerDisabled: boolean = false;
+
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  public getError(emailControl: FormControl, passwordControl: FormControl): string {
+
+    if ( this.firebaseErrorMessage ) return this.firebaseErrorMessage;
+
+    if ( emailControl.errors && emailControl.touched ) {
+
+      return emailControl.errors.required ? 'Email is required!' : 'Email is invalid!';
+
+    }
+
+    if ( passwordControl.errors && passwordControl.touched ) {
+
+      return passwordControl.errors.required ? 'Password is required!' : 'Password must be at least 8 characters!';
+
+    }
+
+    return '';
+
+  }
+
+  public onInputChange(): void {
+
+    this.firebaseErrorMessage = null;
+
+  }
+
+  public onSubmit(form: NgForm): void {
+
+    this.registerDisabled = true;
+
+    let subscription = this.auth.registerEmail(form.value.email, form.value.password)
+    .subscribe(() => {
+
+      subscription.unsubscribe();
+
+      this.auth.sendVerificationEmail()
+      .then(() => {
+
+        this.router.navigate(['/']);
+
+      })
+      .catch(error => {
+
+        console.log(error);
+
+      });
+
+    }, (error: FirebaseError) => {
+
+      subscription.unsubscribe();
+
+      this.firebaseErrorMessage = error.message;
+      this.registerDisabled = false;
+
+    });
+
   }
 
 }

@@ -1,3 +1,20 @@
-<p>
-  register works!
-</p>
+<div class="row justify-content-center align-items-center text-center my-5 py-5">
+  <div class="col-12">
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="form mx-auto">
+      <h1 class="h3 mb-3 font-weight-normal">Register a new account!</h1>
+      <hr>
+      <input (input)="onInputChange()" ngModel #email="ngModel" name="email" type="email" class="form-control top-half-input" placeholder="Email" required email>
+      <input (input)="onInputChange()" ngModel #password="ngModel" name="password" type="password" class="form-control bottom-half-input" placeholder="Password" required minlength="8" maxlength="24">
+      <div *ngIf="firebaseErrorMessage || (email.errors && email.touched) || (password.errors && password.touched)" class="text-left w-100">
+        <small class="help-text text-danger">
+          {{ getError(email, password) }}
+        </small>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block mt-3" type="submit" [disabled]="registerDisabled || firebaseErrorMessage || form.invalid">Register</button>
+      <hr>
+      <div class="text-left text-muted w-100">
+        <span>You can also directly <a routerLink="/auth/login">login with your Facebook account</a> without registeration.</span>
+      </div>
+    </form>
+  </div>
+</div>

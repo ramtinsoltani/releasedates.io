@@ -1,3 +1,26 @@
-<p>
-  login works!
-</p>
+<div class="row justify-content-center align-items-center text-center my-5 py-5">
+  <div class="col-12">
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="form mx-auto">
+      <h1 class="h3 mb-3 font-weight-normal">Login to your account</h1>
+      <hr>
+      <input (input)="onInputChange()" ngModel #email="ngModel" name="email" type="email" class="form-control top-half-input" placeholder="Email" required email>
+      <input (input)="onInputChange()" ngModel #password="ngModel" name="password" type="password" class="form-control bottom-half-input" placeholder="Password" required minlength="8" maxlength="24">
+      <div *ngIf="firebaseErrorMessage || (email.errors && email.touched) || (password.errors && password.touched)" class="text-left w-100">
+        <small class="help-text text-danger">
+          {{ getError(email, password) }}
+        </small>
+      </div>
+      <button class="btn btn-lg btn-secondary btn-block mt-3" type="submit" [disabled]="loginDisabled || firebaseErrorMessage || form.invalid">Login</button>
+      <button (click)="onFacebookLogin()" class="btn btn-lg btn-primary btn-block mt-3" type="button" [disabled]="loginDisabled">Login with Facebook</button>
+      <div *ngIf="facebookErrorMessage" class="text-left w-100">
+        <small class="help-text text-danger">
+          {{ facebookErrorMessage }}
+        </small>
+      </div>
+      <hr>
+      <div class="text-left text-muted w-100">
+        <a routerLink="/auth/reset">I don't remember my password</a>
+      </div>
+    </form>
+  </div>
+</div>

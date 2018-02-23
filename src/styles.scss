@@ -3,3 +3,34 @@ html, body {
   height: calc(100% - 120px);
   top: 0;
 }
+
+.form {
+  width: 100%;
+  max-width: 330px;
+}
+
+.form .top-half-input {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form .bottom-half-input {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form input.ng-invalid.ng-touched {
+  border: 1px solid #dc3545;
+}
+
+.cursor-link {
+  cursor: pointer;
+}
+
+.alert-box {
+  position: fixed;
+  z-index: 1031;
+  margin-top: -20px;
+  opacity: .9;
+}

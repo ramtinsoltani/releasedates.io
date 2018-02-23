@@ -3,6 +3,7 @@ export { FooterComponent } from '../core/footer/footer.component';
 export { NotFoundComponent } from '../core/not-found/not-found.component';
 export { LoginComponent } from '../auth/login/login.component';
 export { RegisterComponent } from '../auth/register/register.component';
+export { ResetComponent } from '../auth/reset/reset.component';
 export { HomeComponent } from '../home/home.component';
 export { PinsComponent } from '../home/pins/pins.component';
 export { RecentsComponent } from '../home/recents/recents.component';
