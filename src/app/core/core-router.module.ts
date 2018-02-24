@@ -3,7 +3,8 @@ import { RouterModule, PreloadAllModules } from '@angular/router';
 
 import {
   HomeComponent,
-  NotFoundComponent
+  NotFoundComponent,
+  PrivacyComponent
 } from '@components';
 
 @NgModule({
@@ -13,6 +14,7 @@ import {
       { path: 'search', loadChildren: '../search/search.module#SearchModule' },
       { path: 'auth', loadChildren: '../auth/auth.module#AuthModule' },
       { path: 'series', loadChildren: '../series/series.module#SeriesModule' },
+      { path: 'privacy', component: PrivacyComponent },
       { path: '**', component: NotFoundComponent }
     ], { preloadingStrategy: PreloadAllModules })
   ],

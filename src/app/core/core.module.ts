@@ -8,7 +8,8 @@ import { CoreRouterModule } from '@routers';
 import {
   HeaderComponent,
   FooterComponent,
-  NotFoundComponent
+  NotFoundComponent,
+  PrivacyComponent
 } from '@components';
 
 import {
@@ -24,7 +25,8 @@ import {
   declarations: [
     HeaderComponent,
     FooterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PrivacyComponent
   ],
   imports: [
     CommonModule,
