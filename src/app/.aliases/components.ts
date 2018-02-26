@@ -10,8 +10,6 @@ export { PinsComponent } from '../home/pins/pins.component';
 export { RecentsComponent } from '../home/recents/recents.component';
 export { SummaryItemComponent } from '../home/summary-item/summary-item.component';
 export { SearchComponent } from '../search/search.component';
-export { ResultsListComponent } from '../search/results-list/results-list.component';
-export { ResultsItemComponent } from '../search/results-item/results-item.component';
 export { SeriesComponent } from '../series/series.component';
 export { SeriesDetailsComponent } from '../series/series-details/series-details.component';
 export { SeriesEpisodeComponent } from '../series/series-episode/series-episode.component';

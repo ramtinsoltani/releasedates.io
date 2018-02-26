@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { CoreRouterModule } from '@routers';
+
+import { BackendInterceptor } from '@interceptors';
 
 import {
   HeaderComponent,
@@ -44,7 +46,8 @@ import {
     AuthService,
     C3Service,
     FireAgentService,
-    StorageService
+    StorageService,
+    { provide: HTTP_INTERCEPTORS, useClass: BackendInterceptor, multi: true}
   ]
 })
 export class CoreModule { }

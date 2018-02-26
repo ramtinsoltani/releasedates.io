@@ -1,8 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Md5 } from 'ts-md5/dist/md5';
 import * as credentials from '../../credentials.json';
+
+import {
+  Poster,
+  SearchResult,
+  Episode,
+  Season,
+  Series
+} from '@models';
 
 @Injectable()
 export class ApiService {
@@ -11,40 +19,39 @@ export class ApiService {
     private http: HttpClient
   ) { }
 
+  public get backendUrl(): string {
+
+    return (<any>credentials).backend.url;
+
+  }
+
   public getGravatar(email: string): string {
 
     return `https://gravatar.com/avatar/${Md5.hashStr(email)}`;
 
   }
 
-  public thetvdb = new (class {
+  public backendSearch(query: string): Promise<SearchResult[]> {
 
-    constructor(private parent: ApiService) { }
+    return new Promise((resolve, reject) => {
 
-    public getToken(): Promise<string> {
+      this.http.get(
+        `${(<any>credentials).backend.url}/search`,
+        { params: new HttpParams().set('q', query.trim()) }
+      )
+      .subscribe((results: SearchResult[]) => {
 
-      return new Promise((resolve, reject) => {
+        resolve(results);
 
-        this.parent.http.post(
-          'https://api.thetvdb.com/login',
-          { apikey: (<any>credentials).thetvdb.apiKey }
-        )
-        .subscribe((response: any) => {
+      }, (error) => {
 
-          console.log(response);
-          resolve(response.token);
-
-        }, (error) => {
-
-          console.log(error);
-          reject(error);
-
-        });
+        console.error(error);
+        reject();
 
       });
 
-    }
+    });
 
-  })(this);
+  }
 
 }

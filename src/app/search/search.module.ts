@@ -1,22 +1,20 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { SearchRouterModule } from '@routers';
 
 import {
-  SearchComponent,
-  ResultsItemComponent,
-  ResultsListComponent
+  SearchComponent
 } from '@components';
 
 @NgModule({
   declarations: [
-    SearchComponent,
-    ResultsItemComponent,
-    ResultsListComponent
+    SearchComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     SearchRouterModule

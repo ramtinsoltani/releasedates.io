@@ -10,6 +10,7 @@ export interface FirebaseError {
 export class FirebaseUser {
 
   constructor(
+    public anonymous: boolean,
     public displayName: string,
     public email: string,
     public emailVerified: boolean,

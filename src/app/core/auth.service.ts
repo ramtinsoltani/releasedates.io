@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/observable/throw';
 import { Subject } from 'rxjs/Subject';
 
 import { FirebaseUser } from '@models';
@@ -14,24 +15,31 @@ export class AuthService {
 
   constructor() {
 
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged((user: firebase.User) => {
 
       if ( user ) {
-
+console.log('Anonymous:', user.isAnonymous)
+let tempSubscription = this.getToken()
+.subscribe((token: string) => {
+  tempSubscription.unsubscribe();
+  console.log(token);
+})
         this.firebaseUser = new FirebaseUser(
+          user.isAnonymous,
           user.displayName,
           user.email,
           user.emailVerified,
           user.photoURL,
           user.uid,
-          user.providerData[0].uid,
-          user.providerData[0].providerId === 'facebook.com'
+          ! user.isAnonymous ? user.providerData[0].uid : null,
+          ! user.isAnonymous ? user.providerData[0].providerId === 'facebook.com' : null
         );
 
       }
       else {
 
         this.firebaseUser = null;
+        firebase.auth().signInAnonymously();
 
       }
 
@@ -70,6 +78,14 @@ export class AuthService {
       });
 
     });
+
+  }
+
+  public getToken(): Observable<string> {
+
+    if ( ! this.isUserLoggedin() ) return Observable.throw(new Error('User not logged in!'));
+
+    return Observable.fromPromise(firebase.auth().currentUser.getIdToken());
 
   }
 

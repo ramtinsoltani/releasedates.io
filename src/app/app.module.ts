@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import * as firebase from 'firebase';
@@ -19,6 +20,7 @@ firebase.initializeApp((<any>credentials).firebase);
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CoreModule,
     HomeModule
   ],
