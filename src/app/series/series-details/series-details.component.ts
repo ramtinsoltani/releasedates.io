@@ -1,13 +1,32 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import {
+  transition,
+  style,
+  animate,
+  trigger
+} from '@angular/animations';
+
+import {
   Poster
 } from '@models';
 
 @Component({
   selector: 'app-series-details',
   templateUrl: './series-details.component.html',
-  styleUrls: ['./series-details.component.scss']
+  styleUrls: ['./series-details.component.scss'],
+  animations: [
+    trigger('fadeIn', [
+      transition('void => *', [
+        style({
+          opacity: 0
+        }),
+        animate(500, style({
+          opacity: 1
+        }))
+      ])
+    ])
+  ]
 })
 export class SeriesDetailsComponent implements OnInit {
 
@@ -43,6 +62,9 @@ export class SeriesDetailsComponent implements OnInit {
 
   @Input('totalEpisodes')
   public totalEpisodes: number;
+
+  @Input('nextEpisode')
+  public nextEpisode: string;
 
   public selectedPoster = 0;
 

@@ -1,3 +1,24 @@
-<p>
-  series-season works!
-</p>
+<div class="row mt-5" @fadeIn>
+  <div class="col-12">
+    <div class="d-flex justify-content-between mb-2">
+      <h3>{{ season.number === 0 ? 'Specials' : 'Season ' + season.number }}</h3>
+      <h3 class="text-secondary">{{ season.number === 0 ? '' : seasonYear }}</h3>
+    </div>
+    <div class="list-group">
+      <div
+      class="list-group-item d-flex justify-content-between cursor-link"
+      [ngClass]="{ 'list-group-item-warning': isEpisodeUpcoming(episode) }"
+      *ngFor="let episode of season.episodes"
+      (mouseenter)="onEpisodeHover($event)"
+      (mouseleave)="onEpisodeLeave($event)"
+      (click)="onOpenEpisode(episode)">
+        <span *ngIf="episode.name">{{ episode.number }}. {{ episode.name }}</span>
+        <span *ngIf="! episode.name"><em><strong>Untitled</strong></em></span>
+        <span *ngIf="season.number > 0">{{ formatRuntime() }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<app-series-episode
+#episodeModal
+[seasonNumber]="season.number"></app-series-episode>

@@ -1,4 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Input
+} from '@angular/core';
+
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import {
+  ApiService,
+  C3Service
+} from '@services';
+
+import { Episode } from '@models';
 
 @Component({
   selector: 'app-series-episode',
@@ -7,9 +22,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SeriesEpisodeComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('content')
+  public content: ElementRef;
 
-  ngOnInit() {
+  @Input('seasonNumber')
+  public seasonNumber: number;
+
+  public episodeAirDate: string;
+  public episode: Episode;
+
+  constructor(
+    private modal: NgbModal,
+    private api: ApiService,
+    private c3: C3Service
+  ) { }
+
+  ngOnInit() { }
+
+  public open(episode: Episode): void {
+
+    this.episode = episode;
+
+    this.episodeAirDate = this.c3.getEpisodeAirDate(episode, this.c3.seriesAirDate);
+    this.modal.open(this.content, { size: 'lg' });
+
   }
 
 }

@@ -18,7 +18,7 @@ export interface Episode {
   number: number;
   name: string;
   overview: string;
-  airdate: string;
+  airDate: string;
 
 }
 

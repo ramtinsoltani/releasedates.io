@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" @fadeIn>
   <div class="col-4">
     <div *ngIf="posters.length" class="row w-100 poster-controls" style="z-index: 1; position: absolute; height: calc(100% - 96px);">
       <div class="col-4 d-flex justify-content-center align-items-center">
@@ -85,6 +85,12 @@
       <hr>
     </ng-template>
     <dl class="row">
+      <ng-template [ngIf]="nextEpisode">
+        <dt class="col-sm-3 text-warning">New Episode:</dt>
+        <dd class="col-sm-9">
+          <span class="badge badge-warning text-light" style="font-size: 1rem;">{{ nextEpisode }}</span>
+        </dd>
+      </ng-template>
       <ng-template [ngIf]="airDate">
         <dt class="col-sm-3">Air Date</dt>
         <dd class="col-sm-9">{{ airDate }}</dd>
