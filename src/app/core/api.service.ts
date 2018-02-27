@@ -5,11 +5,9 @@ import { Md5 } from 'ts-md5/dist/md5';
 import * as credentials from '../../credentials.json';
 
 import {
-  Poster,
   SearchResult,
-  Episode,
-  Season,
-  Series
+  Series,
+  VideosResult
 } from '@models';
 
 @Injectable()
@@ -68,10 +66,33 @@ export class ApiService {
 
       }, (error) => {
 
-        console.log(error);
+        console.error(error);
         reject();
 
       })
+
+    });
+
+  }
+
+  public backendVideos(query: string): Promise<VideosResult[]> {
+
+    return new Promise((resolve, reject) => {
+
+      this.http.get(
+        `${(<any>credentials).backend.url}/videos`,
+        { params: new HttpParams().set('q', query.trim())}
+      )
+      .subscribe((results: VideosResult[]) => {
+
+        resolve(results);
+
+      }, (error) => {
+
+        console.error(error);
+        reject();
+
+      });
 
     });
 

@@ -1,13 +1,52 @@
 <ng-template let-d="dismiss" #content>
-  <div class="modal-header">
+  <div class="modal-header" @fadeIn>
     <h4 class="modal-title">S{{ seasonNumber < 10 ? '0' + seasonNumber : seasonNumber }}E{{ episode.number < 10 ? '0' + episode.number : episode.number }}{{ episode.name ? ' - ' + episode.name : '' }}</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
-    <span class="text-small text-muted">{{ episodeAirDate }}</span>
-    <hr>
+  <div class="modal-body" @fadeIn>
+    <ng-template [ngIf]="episodeAirDate">
+      <div class="d-flex justify-content-between">
+        <span class="text-small text-muted"><strong>Air Date:</strong> {{ episodeAirDate }}</span>
+        <span *ngIf="isUpcoming" class="badge badge-warning text-light" style="font-size: 1rem;">New Episode</span>
+      </div>
+      <hr>
+    </ng-template>
     <p *ngIf="episode.overview">{{ episode.overview }}</p>
+    <h4 class="mt-5">Watch on DailyMotion</h4>
+    <hr>
+    <ng-template [ngIf]="videoResults.length">
+      <div class="list-group">
+        <a
+        @fadeIn
+        class="list-group-item d-flex justify-content-between align-items-center"
+        *ngFor="let video of videoResults"
+        [href]="video.url"
+        target="_blank"
+        (mouseenter)="onVideoHover($event)"
+        (mouseleave)="onVideoLeave($event)">
+          <div class="d-flex align-items-center">
+            <div class="d-flex justify-content-center p-0 m-0" style="width: 71px;">
+              <img [src]="video.thumbnail" class="img-fluid rounded" style="max-height: 40px;">
+            </div>
+            <span class="ml-3">{{ video.title }}</span>
+          </div>
+          <span>{{ video.duration }}</span>
+        </a>
+      </div>
+    </ng-template>
+    <ng-template [ngIf]="pending">
+      <div class="my-5 text-center w-100">
+        <svg class="loader" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;">
+          <path d="M270,14c0,7.7-6.3,14-14,14C130.1,28,28,130.1,28,256c0,7.7-6.3,14-14,14s-14-6.3-14-14C0,114.6,114.6,0,256,0 C263.7,0,270,6.3,270,14z"/>
+        </svg>
+      </div>
+    </ng-template>
+    <ng-template [ngIf]="showError">
+      <div class="d-flex justify-content-center text-center my5">
+        <p>No streams found for this episode!</p>
+      </div>
+    </ng-template>
   </div>
 </ng-template>

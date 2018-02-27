@@ -51,6 +51,7 @@ export class SeriesComponent implements OnInit {
         this.nextEpisode = this.c3.isEpisodeUpcoming(lastEpisode) ? this.c3.getEpisodeAirDate(lastEpisode, this.series.airDate) : null;
 
         this.c3.seriesAirDate = this.series.airDate;
+        this.c3.seriesName = this.series.name;
 
       })
       .catch(() => {

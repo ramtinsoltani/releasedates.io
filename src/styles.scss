@@ -34,3 +34,14 @@ html, body {
   margin-top: -20px;
   opacity: .9;
 }
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+.loader {
+  width: 64px;
+  height: 64px;
+  fill: #6c757d;
+  animation: spin 1s linear infinite;
+}

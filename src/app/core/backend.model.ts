@@ -47,3 +47,12 @@ export interface Series {
   seasons: Season[];
 
 }
+
+export interface VideosResult {
+
+  title: string;
+  duration: string;
+  url: string;
+  thumbnail: string;
+
+}

@@ -9,8 +9,11 @@ import {
 export class C3Service {
 
   public seriesAirDate: string;
+  public seriesName: string;
 
   public getEpisodeAirDate(episode: Episode, seriesAirDate: string): string {
+
+    if ( ! episode.airDate ) return null;
 
     const year = +episode.airDate.substr(0, 4);
     const month = +episode.airDate.substr(5, 2) - 1;
