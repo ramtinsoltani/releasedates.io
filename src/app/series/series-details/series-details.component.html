@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-4">
-    <div *ngIf="posters.length > 1" class="row w-100 poster-controls" style="z-index: 1; position: absolute; height: calc(100% - 96px);">
+    <div *ngIf="posters.length" class="row w-100 poster-controls" style="z-index: 1; position: absolute; height: calc(100% - 96px);">
       <div class="col-4 d-flex justify-content-center align-items-center">
         <svg class="cursor-link" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 240.823 240.823" width="32" height="40" (click)="previousPoster()">
           <filter id="dropshadow1" height="130%">
@@ -80,25 +80,41 @@
       </div>
     </div>
     <hr>
-    <p class="text-justify">{{ overview }}</p>
-    <hr>
+    <ng-template [ngIf]="overview">
+      <p class="text-justify">{{ overview }}</p>
+      <hr>
+    </ng-template>
     <dl class="row">
-      <dt class="col-sm-3">Air Date</dt>
-      <dd class="col-sm-9">{{ airDate }}</dd>
-      <dt class="col-sm-3">Network</dt>
-      <dd class="col-sm-9">{{ network }}</dd>
-      <dt class="col-sm-3">Status</dt>
-      <dd class="col-sm-9">{{ status }}</dd>
-      <dt class="col-sm-3">Genre</dt>
-      <dd class="col-sm-9">
-        <span class="badge badge-pill badge-secondary mr-2" *ngFor="let item of genre">{{ item }}</span>
-      </dd>
-      <dt class="col-sm-3">Total Seasons</dt>
-      <dd class="col-sm-9">{{ totalSeasons }}</dd>
-      <dt class="col-sm-3">Total Episodes</dt>
-      <dd class="col-sm-9">{{ totalEpisodes }}</dd>
-      <dt class="col-sm-3">IMBD Link</dt>
-      <dd class="col-sm-9"><a [href]="imdbLink" target="_blank"><button class="btn btn-primary">View on IMDB</button></a></dd>
+      <ng-template [ngIf]="airDate">
+        <dt class="col-sm-3">Air Date</dt>
+        <dd class="col-sm-9">{{ airDate }}</dd>
+      </ng-template>
+      <ng-template [ngIf]="network">
+        <dt class="col-sm-3">Network</dt>
+        <dd class="col-sm-9">{{ network }}</dd>
+      </ng-template>
+      <ng-template [ngIf]="status">
+        <dt class="col-sm-3">Status</dt>
+        <dd class="col-sm-9">{{ status }}</dd>
+      </ng-template>
+      <ng-template [ngIf]="genre && genre.length">
+        <dt class="col-sm-3">Genre</dt>
+        <dd class="col-sm-9">
+          <span class="badge badge-pill badge-secondary mr-2" *ngFor="let item of genre">{{ item }}</span>
+        </dd>
+      </ng-template>
+      <ng-template [ngIf]="totalSeasons">
+        <dt class="col-sm-3">Total Seasons</dt>
+        <dd class="col-sm-9">{{ totalSeasons }}</dd>
+      </ng-template>
+      <ng-template [ngIf]="totalEpisodes">
+        <dt class="col-sm-3">Total Episodes</dt>
+        <dd class="col-sm-9">{{ totalEpisodes }}</dd>
+      </ng-template>
+      <ng-template [ngIf]="imdbLink">
+        <dt class="col-sm-3">IMBD Link</dt>
+        <dd class="col-sm-9"><a [href]="imdbLink" target="_blank"><button class="btn btn-primary">View on IMDB</button></a></dd>
+      </ng-template>
     </dl>
   </div>
 </div>
