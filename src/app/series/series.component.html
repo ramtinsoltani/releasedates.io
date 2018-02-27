@@ -13,7 +13,7 @@
   [totalEpisodes]="series.totalEpisodes"
   [nextEpisode]="nextEpisode"></app-series-details>
   <hr>
-  <app-series-season *ngFor="let season of series.seasons.reverse()" [season]="season" [runtime]="series.runtime"></app-series-season>
+  <app-series-season *ngFor="let season of series.seasons" [season]="season" [runtime]="series.runtime"></app-series-season>
 </ng-template>
 <ng-template [ngIf]="showError">
   <div class="mt-5 pt-5 w-100 d-flex align-items-center flex-column">

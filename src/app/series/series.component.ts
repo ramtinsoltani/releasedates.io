@@ -44,6 +44,7 @@ export class SeriesComponent implements OnInit {
         this.pending = false;
         this.showError = false;
         this.series = results;
+        this.series.seasons = this.series.seasons.reverse();
 
         const lastSeason = this.series.seasons[this.series.seasons.length - 1];
         const lastEpisode = lastSeason.episodes[lastSeason.episodes.length - 1];
