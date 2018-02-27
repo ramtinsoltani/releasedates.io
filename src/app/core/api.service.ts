@@ -54,4 +54,27 @@ export class ApiService {
 
   }
 
+  public backendSeries(id: number): Promise<Series> {
+
+    return new Promise((resolve, reject) => {
+
+      this.http.get(
+        `${(<any>credentials).backend.url}/series`,
+        { params: new HttpParams().set('id', id + '')}
+      )
+      .subscribe((results: Series) => {
+
+        resolve(results);
+
+      }, (error) => {
+
+        console.log(error);
+        reject();
+
+      })
+
+    });
+
+  }
+
 }

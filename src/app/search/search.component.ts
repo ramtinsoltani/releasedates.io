@@ -56,6 +56,7 @@ export class SearchComponent implements OnInit {
 
       this.results = [];
       this.pending = true;
+      this.showError = false;
 
       this.api.backendSearch(params.q)
       .then((results: SearchResult[]) => {

@@ -38,7 +38,7 @@ export interface Series {
   network: string;
   rating: number;
   imdbLink: string;
-  airdate: string;
+  airDate: string;
   runtime: string;
   genre: string[];
   posters: Poster[];

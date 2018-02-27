@@ -1,3 +1,104 @@
-<p>
-  series-details works!
-</p>
+<div class="row">
+  <div class="col-4">
+    <div *ngIf="posters.length > 1" class="row w-100 poster-controls" style="z-index: 1; position: absolute; height: calc(100% - 96px);">
+      <div class="col-4 d-flex justify-content-center align-items-center">
+        <svg class="cursor-link" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 240.823 240.823" width="32" height="40" (click)="previousPoster()">
+          <filter id="dropshadow1" height="130%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="20"/>
+            <feComponentTransfer>
+              <feFuncA type="linear" slope=".5"/>
+            </feComponentTransfer>
+            <feMerge>
+              <feMergeNode/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        	<path style="fill: white; filter: url(#dropshadow1);" d="M57.633,129.007L165.93,237.268c4.752,4.74,12.451,4.74,17.215,0c4.752-4.74,4.752-12.439,0-17.179   l-99.707-99.671l99.695-99.671c4.752-4.74,4.752-12.439,0-17.191c-4.752-4.74-12.463-4.74-17.215,0L57.621,111.816   C52.942,116.507,52.942,124.327,57.633,129.007z" fill="#FFFFFF"/>
+        </svg>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center text-light flex-column">
+        <a [href]="posters[selectedPoster].poster" target="_blank">
+          <svg class="mb-2" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" width="32" height="40">
+            <filter id="dropshadow3" height="130%">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="20"/>
+              <feComponentTransfer>
+                <feFuncA type="linear" slope=".5"/>
+              </feComponentTransfer>
+              <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          	<path style="fill: white; filter:url(#dropshadow3);" d="M378.528,214.688l-21.088-24c-5.824-6.624-15.904-7.264-22.56-1.472L272,244.32V16c0-8.832-7.168-16-16-16h-32
+          		c-8.832,0-16,7.168-16,16v228.32l-62.88-55.104c-6.624-5.792-16.704-5.152-22.56,1.472l-21.088,23.968
+          		c-5.856,6.656-5.184,16.8,1.472,22.624l126.528,110.752c6.048,5.28,15.04,5.28,21.088,0L377.056,237.28
+          		C383.712,231.456,384.384,221.312,378.528,214.688z"/>
+          	<path style="fill: white; filter:url(#dropshadow3);" d="M416,416H64c-8.832,0-16,7.168-16,16v32c0,8.832,7.168,16,16,16h352c8.832,0,16-7.168,16-16v-32
+          		C432,423.168,424.832,416,416,416z"/>
+          </svg>
+        </a>
+        <p style="text-shadow: 0 0 5px rgba(0,0,0, .75);"><strong>{{ selectedPoster + 1 }}/{{ posters.length }}</strong></p>
+      </div>
+      <div class="col-4 d-flex justify-content-center align-items-center">
+        <svg class="cursor-link" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240.823 240.823" width="32" height="40" (click)="nextPoster()">
+          <filter id="dropshadow2" height="130%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="20"/>
+            <feComponentTransfer>
+              <feFuncA type="linear" slope=".5"/>
+            </feComponentTransfer>
+            <feMerge>
+              <feMergeNode/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        	<path style="fill: white; filter:url(#dropshadow2);" d="M183.189,111.816L74.892,3.555c-4.752-4.74-12.451-4.74-17.215,0c-4.752,4.74-4.752,12.439,0,17.179
+        		l99.707,99.671l-99.695,99.671c-4.752,4.74-4.752,12.439,0,17.191c4.752,4.74,12.463,4.74,17.215,0l108.297-108.261
+        		C187.881,124.315,187.881,116.495,183.189,111.816z"/>
+        </svg>
+      </div>
+    </div>
+    <div class="row w-100 m-0" style="z-index: 0;">
+      <div class="col-12 text-center p-0">
+        <img [src]="getSelectedPoster()" class="img-fluid rounded m-auto">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 d-flex flex-column">
+        <button class="btn btn-danger" style="width: 100%; margin-top: 10px;">Pin</button>
+        <button class="btn btn-primary" style="width: 100%; margin-top: 10px;" disabled="true">Turn on notifications</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="d-flex justify-content-between align-items-center m-0 p-0">
+      <h2>{{ name }}</h2>
+      <div class="d-flex justify-content-center align-items-center" style="margin-right: 20px;">
+        <svg style="z-index: 0; position: absolute;" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.481 19.481" height="50" width="50">
+            <path [ngStyle]="{ fill: getRatingColor() }" d="m10.201,.758l2.478,5.865 6.344,.545c0.44,0.038 0.619,0.587 0.285,0.876l-4.812,4.169 1.442,6.202c0.1,0.431-0.367,0.77-0.745,0.541l-5.452-3.288-5.452,3.288c-0.379,0.228-0.845-0.111-0.745-0.541l1.442-6.202-4.813-4.17c-0.334-0.289-0.156-0.838 0.285-0.876l6.344-.545 2.478-5.864c0.172-0.408 0.749-0.408 0.921,0z"/>
+        </svg>
+        <span style="z-index: 1;" class="text-light"><strong>{{ rating }}</strong></span>
+      </div>
+    </div>
+    <hr>
+    <p class="text-justify">{{ overview }}</p>
+    <hr>
+    <dl class="row">
+      <dt class="col-sm-3">Air Date</dt>
+      <dd class="col-sm-9">{{ airDate }}</dd>
+      <dt class="col-sm-3">Network</dt>
+      <dd class="col-sm-9">{{ network }}</dd>
+      <dt class="col-sm-3">Status</dt>
+      <dd class="col-sm-9">{{ status }}</dd>
+      <dt class="col-sm-3">Genre</dt>
+      <dd class="col-sm-9">
+        <span class="badge badge-pill badge-secondary mr-2" *ngFor="let item of genre">{{ item }}</span>
+      </dd>
+      <dt class="col-sm-3">Total Seasons</dt>
+      <dd class="col-sm-9">{{ totalSeasons }}</dd>
+      <dt class="col-sm-3">Total Episodes</dt>
+      <dd class="col-sm-9">{{ totalEpisodes }}</dd>
+      <dt class="col-sm-3">IMBD Link</dt>
+      <dd class="col-sm-9"><a [href]="imdbLink" target="_blank"><button class="btn btn-primary">View on IMDB</button></a></dd>
+    </dl>
+  </div>
+</div>
