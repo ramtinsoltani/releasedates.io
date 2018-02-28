@@ -11,7 +11,7 @@
         </small>
       </div>
       <button class="btn btn-lg btn-secondary btn-block mt-3" type="submit" [disabled]="loginDisabled || firebaseErrorMessage || form.invalid">Login</button>
-      <button (click)="onFacebookLogin()" class="btn btn-lg btn-primary btn-block mt-3" type="button" [disabled]="loginDisabled">Login with Facebook</button>
+      <button (click)="onFacebookLogin()" class="btn btn-lg btn-danger btn-block mt-3" type="button" [disabled]="loginDisabled">Login with Facebook</button>
       <div *ngIf="facebookErrorMessage" class="text-left w-100">
         <small class="help-text text-danger">
           {{ facebookErrorMessage }}

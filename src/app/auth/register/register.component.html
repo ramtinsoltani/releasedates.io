@@ -10,7 +10,7 @@
           {{ getError(email, password) }}
         </small>
       </div>
-      <button class="btn btn-lg btn-primary btn-block mt-3" type="submit" [disabled]="registerDisabled || firebaseErrorMessage || form.invalid">Register</button>
+      <button class="btn btn-lg btn-danger btn-block mt-3" type="submit" [disabled]="registerDisabled || firebaseErrorMessage || form.invalid">Register</button>
       <hr>
       <div class="text-left text-muted w-100">
         <span>You can also directly <a routerLink="/auth/login">login with your Facebook account</a> without registeration.</span>
