@@ -84,7 +84,7 @@ export class C3Service {
     const hours = Math.floor(+runtime / 60);
     const minutes = +runtime % 60;
 
-    return `${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+    return `${hours ? (hours < 10 ? '0' + hours : hours) + ':' : ''}${minutes < 10 ? '0' : ''}${minutes}:00`;
 
   }
 
