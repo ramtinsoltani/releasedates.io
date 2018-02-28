@@ -3,7 +3,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import {
   Series,
-  Episode
+  Episode,
+  Season
 } from '@models';
 
 import {
@@ -44,13 +45,20 @@ export class SeriesComponent implements OnInit {
         this.pending = false;
         this.showError = false;
         this.series = results;
+
+        // Sanitize seasons
+        this.series.seasons = this.series.seasons.map((season: Season) => {
+
+          return this.c3.sanitizeSeason(season);
+
+        });
+
+        // Reverse the order of seasons
         this.series.seasons = this.series.seasons.reverse();
+        // Get next new episode of that last season (if any)
+        this.nextEpisode = this.c3.getNextEpisodeAirDate(this.series.seasons[0], this.series.airDate);
 
-        const lastSeason = this.series.seasons[this.series.seasons.length - 1];
-        const lastEpisode = lastSeason.episodes[lastSeason.episodes.length - 1];
-
-        this.nextEpisode = this.c3.isEpisodeUpcoming(lastEpisode) ? this.c3.getEpisodeAirDate(lastEpisode, this.series.airDate) : null;
-
+        // Set variables for child components
         this.c3.seriesAirDate = this.series.airDate;
         this.c3.seriesName = this.series.name;
 

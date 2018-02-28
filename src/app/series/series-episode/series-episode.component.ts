@@ -80,24 +80,29 @@ export class SeriesEpisodeComponent implements OnInit {
     this.episodeAirDate = this.c3.getEpisodeAirDate(episode, this.c3.seriesAirDate);
 
     this.videoResults = [];
-    this.pending = true;
     this.showError = false;
 
-    this.api.backendVideos(`${this.c3.seriesName} ${episode.name ? episode.name : ('season ' + this.seasonNumber + ' episode ' + episode.number)}`)
-    .then((results: VideosResult[]) => {
+    if ( ! this.isUpcoming && this.episodeAirDate ) {
 
-      this.videoResults = results;
-      this.pending = false;
-      this.showError = false;
+      this.pending = true;
 
-    })
-    .catch(() => {
+      this.api.backendVideos(`${this.c3.seriesName} ${episode.name ? episode.name : ('season ' + this.seasonNumber + ' episode ' + episode.number)}`)
+      .then((results: VideosResult[]) => {
 
-      this.videoResults = [];
-      this.pending = false;
-      this.showError = true;
+        this.videoResults = results;
+        this.pending = false;
+        this.showError = false;
 
-    });
+      })
+      .catch(() => {
+
+        this.videoResults = [];
+        this.pending = false;
+        this.showError = true;
+
+      });
+
+    }
 
     this.modal.open(this.content, { size: 'lg' });
 

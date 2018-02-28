@@ -14,27 +14,29 @@
       <hr>
     </ng-template>
     <p *ngIf="episode.overview">{{ episode.overview }}</p>
-    <h4 class="mt-5">Watch on DailyMotion</h4>
-    <hr>
     <ng-template [ngIf]="videoResults.length">
-      <div class="list-group">
-        <a
-        @fadeIn
-        class="list-group-item d-flex justify-content-between align-items-center"
-        *ngFor="let video of videoResults"
-        [href]="video.url"
-        target="_blank"
-        (mouseenter)="onVideoHover($event)"
-        (mouseleave)="onVideoLeave($event)">
-          <div class="d-flex align-items-center">
-            <div class="d-flex justify-content-center p-0 m-0" style="width: 71px;">
-              <img [src]="video.thumbnail" class="img-fluid rounded" style="max-height: 40px;">
+      <h4 class="mt-5">Watch on DailyMotion</h4>
+      <hr>
+      <ng-template [ngIf]="videoResults.length">
+        <div class="list-group">
+          <a
+          @fadeIn
+          class="list-group-item d-flex justify-content-between align-items-center"
+          *ngFor="let video of videoResults"
+          [href]="video.url"
+          target="_blank"
+          (mouseenter)="onVideoHover($event)"
+          (mouseleave)="onVideoLeave($event)">
+            <div class="d-flex align-items-center">
+              <div class="d-flex justify-content-center p-0 m-0" style="width: 71px;">
+                <img [src]="video.thumbnail" class="img-fluid rounded" style="max-height: 40px;">
+              </div>
+              <span class="ml-3">{{ video.title }}</span>
             </div>
-            <span class="ml-3">{{ video.title }}</span>
-          </div>
-          <span>{{ video.duration }}</span>
-        </a>
-      </div>
+            <span>{{ video.duration }}</span>
+          </a>
+        </div>
+      </ng-template>
     </ng-template>
     <ng-template [ngIf]="pending">
       <div class="my-5 text-center w-100">

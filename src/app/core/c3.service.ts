@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import {
   MonthNames,
-  Episode
+  Episode,
+  Season
 } from '@models';
 
 @Injectable()
@@ -23,6 +24,25 @@ export class C3Service {
 
   }
 
+  public sanitizeSeason(season: Season): Season {
+
+    const sanitizedSeason: Season = {
+      number: season.number,
+      episodes: []
+    };
+
+    for ( const episode of season.episodes ) {
+
+      if ( ! episode.airDate && ! episode.name ) continue;
+
+      sanitizedSeason.episodes.push(episode);
+
+    }
+
+    return sanitizedSeason;
+
+  }
+
   public isEpisodeUpcoming(episode: Episode): boolean {
 
     if ( ! episode.airDate ) return false;
@@ -38,6 +58,22 @@ export class C3Service {
     today.setHours(0, 0, 0);
 
     return airDate.getTime() >= today.getTime();
+
+  }
+
+  public getNextEpisodeAirDate(season: Season, seriesAirDate: string): string {
+
+    for ( const episode of season.episodes ) {
+
+      if ( this.isEpisodeUpcoming(episode) ) {
+
+        return this.getEpisodeAirDate(episode, seriesAirDate);
+
+      }
+
+    }
+
+    return null;
 
   }
 
