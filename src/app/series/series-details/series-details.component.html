@@ -105,7 +105,7 @@
       <ng-template [ngIf]="genre && genre.length">
         <dt class="col-sm-3">Genre</dt>
         <dd class="col-sm-9">
-          <span class="badge badge-pill badge-secondary mr-2" *ngFor="let item of genre">{{ item }}</span>
+          <span class="badge badge-pill badge-danger mr-2" *ngFor="let item of genre">{{ item }}</span>
         </dd>
       </ng-template>
       <ng-template [ngIf]="totalSeasons">
@@ -118,7 +118,7 @@
       </ng-template>
       <ng-template [ngIf]="imdbLink">
         <dt class="col-sm-3">IMBD Link</dt>
-        <dd class="col-sm-9"><a [href]="imdbLink" target="_blank"><button class="btn btn-primary">View on IMDB</button></a></dd>
+        <dd class="col-sm-9"><a [href]="imdbLink" target="_blank">View on IMDB</a></dd>
       </ng-template>
     </dl>
   </div>

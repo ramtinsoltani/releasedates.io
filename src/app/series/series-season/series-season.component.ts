@@ -2,7 +2,6 @@ import {
   Component,
   OnInit,
   Input,
-  Renderer2,
   ViewChild
 } from '@angular/core';
 
@@ -51,7 +50,6 @@ export class SeriesSeasonComponent implements OnInit {
   public seasonYear: string;
 
   constructor(
-    private render: Renderer2,
     private c3: C3Service
   ) { }
 
@@ -64,18 +62,6 @@ export class SeriesSeasonComponent implements OnInit {
   public formatRuntime(): string {
 
     return this.c3.formatRuntime(this.runtime);
-
-  }
-
-  public onEpisodeHover(event: MouseEvent): void {
-
-    this.render.addClass(event.target, 'active');
-
-  }
-
-  public onEpisodeLeave(event: MouseEvent): void {
-
-    this.render.removeClass(event.target, 'active');
 
   }
 

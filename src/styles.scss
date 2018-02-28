@@ -1,7 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+
 html, body {
-  height: calc(100% - 120px);
+  height: calc(100% - 140px);
   top: 0;
+}
+
+a, a:hover {
+  color: #dc3545;
 }
 
 .form {
@@ -42,6 +48,11 @@ html, body {
 .loader {
   width: 64px;
   height: 64px;
-  fill: #6c757d;
+  fill: #dc3545;
   animation: spin 1s linear infinite;
+}
+
+.list-group-item.active {
+  background-color: #dc3545;
+  border-color: #dc3545;
 }

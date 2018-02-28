@@ -6,14 +6,12 @@
     </div>
     <div class="list-group">
       <div
-      class="list-group-item d-flex justify-content-between cursor-link"
+      class="list-group-item list-group-item-action d-flex justify-content-between cursor-link"
       [ngClass]="{ 'list-group-item-warning': isEpisodeUpcoming(episode) }"
       *ngFor="let episode of season.episodes"
-      (mouseenter)="onEpisodeHover($event)"
-      (mouseleave)="onEpisodeLeave($event)"
       (click)="onOpenEpisode(episode)">
         <span *ngIf="episode.name">{{ episode.number }}. {{ episode.name }}</span>
-        <span *ngIf="! episode.name"><em><strong>Untitled</strong></em></span>
+        <span *ngIf="! episode.name">{{ episode.number }}. <em><strong>Unknown</strong></em></span>
         <span *ngIf="season.number > 0">{{ formatRuntime() }}</span>
       </div>
     </div>

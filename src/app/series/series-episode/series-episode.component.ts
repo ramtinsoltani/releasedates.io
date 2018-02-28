@@ -3,8 +3,7 @@ import {
   OnInit,
   ViewChild,
   ElementRef,
-  Input,
-  Renderer2
+  Input
 } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -67,8 +66,7 @@ export class SeriesEpisodeComponent implements OnInit {
   constructor(
     private modal: NgbModal,
     private api: ApiService,
-    private c3: C3Service,
-    private render: Renderer2
+    private c3: C3Service
   ) { }
 
   ngOnInit() { }
@@ -105,18 +103,6 @@ export class SeriesEpisodeComponent implements OnInit {
     }
 
     this.modal.open(this.content, { size: 'lg' });
-
-  }
-
-  public onVideoHover(event: MouseEvent): void {
-
-    this.render.addClass(event.target, 'active');
-
-  }
-
-  public onVideoLeave(event: MouseEvent): void {
-
-    this.render.removeClass(event.target, 'active');
 
   }
 

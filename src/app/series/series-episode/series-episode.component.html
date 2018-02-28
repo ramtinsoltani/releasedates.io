@@ -11,9 +11,11 @@
         <span class="text-small text-muted"><strong>Air Date:</strong> {{ episodeAirDate }}</span>
         <span *ngIf="isUpcoming" class="badge badge-warning text-light" style="font-size: 1rem;">New Episode</span>
       </div>
-      <hr>
     </ng-template>
-    <p *ngIf="episode.overview">{{ episode.overview }}</p>
+    <ng-template [ngIf]="episode.overview">
+      <hr @fadeIn>
+      <p @fadeIn>{{ episode.overview }}</p>
+    </ng-template>
     <ng-template [ngIf]="videoResults.length">
       <h4 class="mt-5">Watch on DailyMotion</h4>
       <hr>
@@ -21,12 +23,10 @@
         <div class="list-group">
           <a
           @fadeIn
-          class="list-group-item d-flex justify-content-between align-items-center"
+          class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
           *ngFor="let video of videoResults"
           [href]="video.url"
-          target="_blank"
-          (mouseenter)="onVideoHover($event)"
-          (mouseleave)="onVideoLeave($event)">
+          target="_blank">
             <div class="d-flex align-items-center">
               <div class="d-flex justify-content-center p-0 m-0" style="width: 71px;">
                 <img [src]="video.thumbnail" class="img-fluid rounded" style="max-height: 40px;">

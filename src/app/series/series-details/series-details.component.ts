@@ -120,7 +120,7 @@ export class SeriesDetailsComponent implements OnInit {
 
   public getRatingColor(): string {
 
-    if ( this.rating >= 9 ) return '#007bff';
+    if ( this.rating >= 9 ) return '#dc3545';
     if ( this.rating > 5 ) return '#ffc107';
     return '#6c757d';
 
