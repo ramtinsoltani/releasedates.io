@@ -59,8 +59,10 @@ export class SeriesComponent implements OnInit {
         this.nextEpisode = this.c3.getNextEpisodeAirDate(this.series.seasons[0], this.series.airDate);
 
         // Set variables for child components
+        this.c3.seriesLastUpdated = this.series.lastUpdated;
         this.c3.seriesAirDate = this.series.airDate;
         this.c3.seriesName = this.series.name;
+        this.c3.seriesId = this.series.id;
 
       })
       .catch(() => {

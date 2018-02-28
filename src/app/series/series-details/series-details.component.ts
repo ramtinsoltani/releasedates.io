@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import {
   transition,
@@ -8,8 +9,17 @@ import {
 } from '@angular/animations';
 
 import {
-  Poster
+  Poster,
+  Pin,
+  PinIdentity,
+  FirebaseUser
 } from '@models';
+
+import {
+  StorageService,
+  C3Service,
+  AuthService
+} from '@services';
 
 @Component({
   selector: 'app-series-details',
@@ -28,7 +38,7 @@ import {
     ])
   ]
 })
-export class SeriesDetailsComponent implements OnInit {
+export class SeriesDetailsComponent implements OnInit, OnDestroy {
 
   @Input('name')
   public name: string;
@@ -67,10 +77,53 @@ export class SeriesDetailsComponent implements OnInit {
   public nextEpisode: string;
 
   public selectedPoster = 0;
+  public isPinningDisabled: boolean = true;
+  public isPinningPending: boolean = false;
+  public isPinned: boolean = false;
+  public authSubscription: Subscription;
+  public pinIdsSubscription: Subscription;
 
-  constructor() { }
+  constructor(
+    private storage: StorageService,
+    private c3: C3Service,
+    private auth: AuthService
+  ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+    this.isPinningDisabled = ! this.auth.isUserLoggedin() || this.auth.isUserAnonymous();
+
+    this.authSubscription = this.auth.userChanged.subscribe((user: FirebaseUser) => {
+
+      this.isPinningDisabled = (! user || user.anonymous);
+
+    });
+
+    this.checkIsPinned(this.storage.pinIds);
+
+    this.pinIdsSubscription = this.storage.pinsChanged.subscribe((ids: PinIdentity[]) => {
+
+      this.checkIsPinned(ids);
+
+    });
+
+  }
+
+  private checkIsPinned(ids: PinIdentity[]): void {
+
+    this.isPinned = false;
+
+    ids.map((id: PinIdentity) => {
+
+      if ( id.id === this.c3.seriesId ) {
+
+        this.isPinned = true;
+
+      }
+
+    });
+
+  }
 
   public getSelectedPoster(): string {
 
@@ -123,6 +176,57 @@ export class SeriesDetailsComponent implements OnInit {
     if ( this.rating >= 9 ) return '#dc3545';
     if ( this.rating > 5 ) return '#ffc107';
     return '#6c757d';
+
+  }
+
+  public onPinUnpin(): void {
+
+    this.isPinningPending = true;
+
+    if ( this.isPinned ) {
+
+      this.storage.unpinSeries(this.c3.seriesId)
+      .then(() => {
+
+        this.isPinningPending = false;
+
+      })
+      .catch(() => {
+
+        this.isPinningPending = false;
+
+      });
+
+    }
+    else {
+
+      this.storage.pinSeries(new Pin(
+        this.c3.seriesId,
+        this.name,
+        this.posters.map((poster: Poster): string => {
+          return poster.thumbnail;
+        }),
+        this.c3.seriesLastUpdated
+      ))
+      .then(() => {
+
+        this.isPinningPending = false;
+
+      })
+      .catch(() => {
+
+        this.isPinningPending = false;
+
+      });
+
+    }
+
+  }
+
+  ngOnDestroy() {
+
+    this.authSubscription.unsubscribe();
+    this.pinIdsSubscription.unsubscribe();
 
   }
 

@@ -13,17 +13,14 @@ export class AuthService {
   private firebaseUser: FirebaseUser;
   public userChanged: Subject<FirebaseUser> = new Subject<FirebaseUser>();
 
-  constructor() {
+  constructor() { }
+
+  public init(): void {
 
     firebase.auth().onAuthStateChanged((user: firebase.User) => {
 
       if ( user ) {
-console.log('Anonymous:', user.isAnonymous)
-let tempSubscription = this.getToken()
-.subscribe((token: string) => {
-  tempSubscription.unsubscribe();
-  console.log(token);
-})
+
         this.firebaseUser = new FirebaseUser(
           user.isAnonymous,
           user.displayName,
@@ -92,6 +89,12 @@ let tempSubscription = this.getToken()
   public isUserLoggedin(): boolean {
 
     return !! firebase.auth().currentUser;
+
+  }
+
+  public isUserAnonymous(): boolean {
+
+    return this.isUserLoggedin() && this.firebaseUser.anonymous;
 
   }
 

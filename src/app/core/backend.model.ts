@@ -44,6 +44,7 @@ export interface Series {
   posters: Poster[];
   totalSeasons: number;
   totalEpisodes: number;
+  lastUpdated: number;
   seasons: Season[];
 
 }

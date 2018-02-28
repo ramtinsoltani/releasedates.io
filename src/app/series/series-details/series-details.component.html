@@ -64,7 +64,7 @@
     </div>
     <div class="row">
       <div class="col-12 d-flex flex-column">
-        <button class="btn btn-danger" style="width: 100%; margin-top: 10px;">Pin</button>
+        <button class="btn btn-danger" style="width: 100%; margin-top: 10px;" (click)="onPinUnpin()" [disabled]="isPinningDisabled || isPinningPending">{{ isPinningDisabled ? 'Pin' : (isPinned ? 'Unpin' : 'Pin') }}</button>
       </div>
     </div>
   </div>

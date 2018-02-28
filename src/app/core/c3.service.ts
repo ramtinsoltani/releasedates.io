@@ -11,6 +11,8 @@ export class C3Service {
 
   public seriesAirDate: string;
   public seriesName: string;
+  public seriesLastUpdated: number;
+  public seriesId: number;
 
   public getEpisodeAirDate(episode: Episode, seriesAirDate: string): string {
 

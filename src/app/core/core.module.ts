@@ -50,4 +50,18 @@ import {
     { provide: HTTP_INTERCEPTORS, useClass: BackendInterceptor, multi: true}
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+
+  constructor(
+    private auth: AuthService,
+    private storage: StorageService,
+    private fireAgent: FireAgentService
+  ) {
+
+    this.auth.init();
+    this.fireAgent.init();
+    this.storage.init();
+
+  }
+
+}
