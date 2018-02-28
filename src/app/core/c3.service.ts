@@ -13,6 +13,8 @@ export class C3Service {
   public seriesName: string;
   public seriesLastUpdated: number;
   public seriesId: number;
+  public seriesHasNewEpisode: boolean;
+  public lastRoute: string = '/';
 
   public getEpisodeAirDate(episode: Episode, seriesAirDate: string): string {
 

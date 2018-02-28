@@ -91,11 +91,11 @@ export class SeriesDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.isPinningDisabled = ! this.auth.isUserLoggedin() || this.auth.isUserAnonymous();
+    this.isPinningDisabled = ! this.auth.isUserLoggedin() || this.auth.isUserAnonymous() || (! this.auth.user.emailVerified && ! this.auth.user.facebook);
 
     this.authSubscription = this.auth.userChanged.subscribe((user: FirebaseUser) => {
 
-      this.isPinningDisabled = (! user || user.anonymous);
+      this.isPinningDisabled = (! user || user.anonymous || (! user.emailVerified && ! user.facebook));
 
     });
 
@@ -206,7 +206,9 @@ export class SeriesDetailsComponent implements OnInit, OnDestroy {
         this.posters.map((poster: Poster): string => {
           return poster.thumbnail;
         }),
-        this.c3.seriesLastUpdated
+        this.c3.seriesLastUpdated,
+        this.c3.seriesHasNewEpisode,
+        this.selectedPoster
       ))
       .then(() => {
 

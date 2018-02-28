@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AuthService } from '@services';
+import {
+  AuthService,
+  C3Service
+} from '@services';
 
 import { FirebaseError } from '@models';
 
@@ -18,6 +21,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
+    private c3: C3Service,
     private router: Router
   ) { }
 
@@ -62,7 +66,7 @@ export class RegisterComponent implements OnInit {
       this.auth.sendVerificationEmail()
       .then(() => {
 
-        this.router.navigate(['/']);
+        this.router.navigate([this.c3.lastRoute ? this.c3.lastRoute : '/']);
 
       })
       .catch(error => {

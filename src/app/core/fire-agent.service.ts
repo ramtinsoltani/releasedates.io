@@ -21,18 +21,26 @@ export class FireAgentService {
 
     this.auth.userChanged.subscribe((user: FirebaseUser) => {
 
-      // Define ref
-      if ( ! this.idsRef && user && ! user.anonymous ) {
-
-        this.idsRef = firebase.database().ref(`/pins/${this.auth.user.firebaseUID}/ids`);
-
-      }
-
       // Detach listener
       if ( this.idsRef && this.isListenerAttached && ( ! user || user.anonymous ) ) {
 
         this.idsRef.off();
         this.isListenerAttached = false;
+
+      }
+
+      // Undefine ref
+      if ( ! user || user.anonymous ) {
+
+        this.idsRef = null;
+        this.pinsChanged.next(null);
+
+      }
+
+      // Define ref
+      if ( ! this.idsRef && user && ! user.anonymous ) {
+
+        this.idsRef = firebase.database().ref(`/pins/${this.auth.user.firebaseUID}/ids`);
 
       }
 
@@ -56,8 +64,8 @@ export class FireAgentService {
 
     return new Promise((resolve, reject) => {
 
-      if ( ! this.auth.isUserLoggedin() || this.auth.isUserAnonymous() ) {
-
+      if ( ! this.auth.isUserLoggedin() || this.auth.isUserAnonymous() || (! this.auth.user.emailVerified && ! this.auth.user.facebook) ) {
+console.log('DENIED')
         reject();
         return;
 
@@ -90,8 +98,8 @@ export class FireAgentService {
 
     return new Promise((resolve, reject) => {
 
-      if ( ! this.auth.isUserLoggedin() || this.auth.isUserAnonymous() ) {
-
+      if ( ! this.auth.isUserLoggedin() || this.auth.isUserAnonymous() || (! this.auth.user.emailVerified && ! this.auth.user.facebook) ) {
+console.log('DENIED')
         reject();
         return;
 

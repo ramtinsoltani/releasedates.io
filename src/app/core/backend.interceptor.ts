@@ -35,8 +35,6 @@ export class BackendInterceptor implements HttpInterceptor {
 
     }
 
-    console.log('Request to backend intercepted!');
-
     if ( this.auth.isUserLoggedin() ) {
 
       return this.auth.getToken()

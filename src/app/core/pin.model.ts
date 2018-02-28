@@ -4,7 +4,9 @@ export class Pin {
     public id: number,
     public name: string,
     public thumbnails: string[],
-    public lastUpdated: number
+    public lastUpdated: number,
+    public hasNewEpisode: boolean,
+    public selectedThumbnail: number
   ) { }
 
 }

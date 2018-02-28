@@ -53,6 +53,9 @@ export class SeriesComponent implements OnInit {
 
         });
 
+
+        // Offset the total number of episodes by the total number of specials
+        if ( this.series.seasons[0].number === 0 ) this.series.totalEpisodes -= this.series.seasons[0].episodes.length;
         // Reverse the order of seasons
         this.series.seasons = this.series.seasons.reverse();
         // Get next new episode of that last season (if any)
@@ -63,6 +66,7 @@ export class SeriesComponent implements OnInit {
         this.c3.seriesAirDate = this.series.airDate;
         this.c3.seriesName = this.series.name;
         this.c3.seriesId = this.series.id;
+        this.c3.seriesHasNewEpisode = !! this.nextEpisode;
 
       })
       .catch(() => {
