@@ -123,10 +123,9 @@ export class PinsComponent implements OnInit, OnDestroy {
           this.storage.updatePin(new Pin(
             pin.id,
             pin.name,
-            pin.thumbnails,
+            pin.thumbnail,
             update.lastUpdated,
-            hasNewEpisode,
-            pin.selectedThumbnail
+            hasNewEpisode
           ));
 
         }

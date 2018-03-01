@@ -3,10 +3,9 @@ export class Pin {
   constructor(
     public id: number,
     public name: string,
-    public thumbnails: string[],
+    public thumbnail: string,
     public lastUpdated: number,
-    public hasNewEpisode: boolean,
-    public selectedThumbnail: number
+    public hasNewEpisode: boolean
   ) { }
 
 }

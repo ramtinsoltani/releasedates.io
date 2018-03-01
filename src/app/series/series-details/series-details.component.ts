@@ -203,12 +203,9 @@ export class SeriesDetailsComponent implements OnInit, OnDestroy {
       this.storage.pinSeries(new Pin(
         this.c3.seriesId,
         this.name,
-        this.posters.map((poster: Poster): string => {
-          return poster.thumbnail;
-        }),
+        this.posters[this.selectedPoster].thumbnail,
         this.c3.seriesLastUpdated,
-        this.c3.seriesHasNewEpisode,
-        this.selectedPoster
+        this.c3.seriesHasNewEpisode
       ))
       .then(() => {
 
