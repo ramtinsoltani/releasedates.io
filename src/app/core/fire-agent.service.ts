@@ -102,7 +102,7 @@ export class FireAgentService {
   }
 
   public savePin(pin: Pin): Promise<void> {
-console.log(pin)
+
     return new Promise((resolve, reject) => {
 
       if ( ! this.auth.isUserLoggedin() || this.auth.isUserAnonymous() || (! this.auth.user.emailVerified && ! this.auth.user.facebook) ) {
@@ -184,7 +184,7 @@ console.log(pin)
   }
 
   public updatePin(key: string, pin: Pin): Promise<void> {
-console.log(pin)
+
     return new Promise((resolve, reject) => {
 
       if ( ! this.auth.isUserLoggedin() || this.auth.isUserAnonymous() || (! this.auth.user.emailVerified && ! this.auth.user.facebook) ) {

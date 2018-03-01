@@ -8,7 +8,7 @@ export { ResetComponent } from '../auth/reset/reset.component';
 export { HomeComponent } from '../home/home.component';
 export { PinsComponent } from '../home/pins/pins.component';
 export { PinComponent } from '../home/pins/pin/pin.component';
-export { RecentsComponent } from '../home/recents/recents.component';
+export { DiscoverComponent } from '../home/discover/discover.component';
 export { SummaryItemComponent } from '../home/summary-item/summary-item.component';
 export { SearchComponent } from '../search/search.component';
 export { SeriesComponent } from '../series/series.component';

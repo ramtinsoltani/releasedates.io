@@ -73,3 +73,11 @@ export interface Update {
   episodes?: EpisodeSummary[];
 
 }
+
+export interface Discovered {
+
+  id: number;
+  name: string;
+  posters: Poster[];
+
+}

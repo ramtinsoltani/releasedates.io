@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { DragulaModule } from 'ng2-dragula';
 
 import {
   HomeComponent,
   PinsComponent,
   PinComponent,
-  RecentsComponent,
+  DiscoverComponent,
   SummaryItemComponent
 } from '@components';
 
@@ -15,11 +16,12 @@ import {
     HomeComponent,
     PinsComponent,
     PinComponent,
-    RecentsComponent,
+    DiscoverComponent,
     SummaryItemComponent
   ],
   imports: [
     CommonModule,
+    RouterModule,
     DragulaModule
   ]
 })

@@ -8,7 +8,8 @@ import {
   SearchResult,
   Series,
   VideosResult,
-  Update
+  Update,
+  Discovered
 } from '@models';
 
 @Injectable()
@@ -108,6 +109,33 @@ export class ApiService {
         { params: new HttpParams().set('id', id + '').append('since', since + '') }
       )
       .subscribe((results: Update) => {
+
+        resolve(results);
+
+      }, (error) => {
+
+        console.error(error);
+        reject();
+
+      });
+
+    });
+
+  }
+
+  public backendDiscover(count?: number): Promise<Discovered[]> {
+
+    let params = new HttpParams();
+
+    if ( count ) params = params.set('count', count + '');
+
+    return new Promise((resolve, reject) => {
+
+      this.http.get(
+        `${(<any>credentials).backend.url}/discover`,
+        { params: params }
+      )
+      .subscribe((results: Discovered[]) => {
 
         resolve(results);
 

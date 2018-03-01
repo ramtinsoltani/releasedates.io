@@ -4,7 +4,8 @@ import {
   MonthNames,
   Episode,
   EpisodeSummary,
-  Season
+  Season,
+  Discovered
 } from '@models';
 
 @Injectable()
@@ -45,6 +46,20 @@ export class C3Service {
     }
 
     return sanitizedSeason;
+
+  }
+
+  public sanitizeDiscovered(discovered: Discovered[]): Discovered[] {
+
+    const sanitized: Discovered[] = [];
+
+    for ( const series of discovered ) {
+
+      if ( series.name ) sanitized.push(series);
+      
+    }
+
+    return sanitized;
 
   }
 
