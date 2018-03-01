@@ -7,7 +7,8 @@ import * as credentials from '../../credentials.json';
 import {
   SearchResult,
   Series,
-  VideosResult
+  VideosResult,
+  Update
 } from '@models';
 
 @Injectable()
@@ -84,6 +85,29 @@ export class ApiService {
         { params: new HttpParams().set('q', query.trim())}
       )
       .subscribe((results: VideosResult[]) => {
+
+        resolve(results);
+
+      }, (error) => {
+
+        console.error(error);
+        reject();
+
+      });
+
+    });
+
+  }
+
+  public backendUpdates(id: number, since: number): Promise<Update> {
+
+    return new Promise((resolve, reject) => {
+
+      this.http.get(
+        `${(<any>credentials).backend.url}/updates`,
+        { params: new HttpParams().set('id', id + '').append('since', since + '') }
+      )
+      .subscribe((results: Update) => {
 
         resolve(results);
 

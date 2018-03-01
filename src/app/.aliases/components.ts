@@ -7,6 +7,7 @@ export { RegisterComponent } from '../auth/register/register.component';
 export { ResetComponent } from '../auth/reset/reset.component';
 export { HomeComponent } from '../home/home.component';
 export { PinsComponent } from '../home/pins/pins.component';
+export { PinComponent } from '../home/pins/pin/pin.component';
 export { RecentsComponent } from '../home/recents/recents.component';
 export { SummaryItemComponent } from '../home/summary-item/summary-item.component';
 export { SearchComponent } from '../search/search.component';

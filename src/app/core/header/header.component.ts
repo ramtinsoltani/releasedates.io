@@ -3,7 +3,8 @@ import {
   OnInit,
   OnDestroy,
   ViewChild,
-  ElementRef
+  ElementRef,
+  NgZone
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -23,16 +24,14 @@ import { FirebaseUser } from '@models';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
-  private trapTriggered: boolean = false;
 
   public user: FirebaseUser = null;
-  @ViewChild('detectTrap')
-  public detectTrap: ElementRef;
 
   constructor(
     private router: Router,
     private auth: AuthService,
-    private api: ApiService
+    private api: ApiService,
+    private zone: NgZone
   ) { }
 
   ngOnInit() {
@@ -42,14 +41,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscription = this.auth.userChanged
     .subscribe((user: FirebaseUser) => {
 
-      this.user = user;
+      this.zone.run(() => {
 
-      if ( ! this.trapTriggered ) {
+        this.user = user;
 
-        this.detectTrap.nativeElement.click();
-        this.trapTriggered = true;
-
-      }
+      });
 
     });
 

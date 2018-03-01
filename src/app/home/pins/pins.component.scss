@@ -1,0 +1,35 @@
+.pins-container {
+
+  min-height: 300px;
+  width: 100%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  &>.card {
+
+    width: 14rem;
+    min-width: 14rem;
+    margin: 10px;
+    box-shadow: none;
+    color: default;
+    transition: box-shadow .2s ease-in-out, color .2s ease-in-out;
+
+    &:hover {
+
+      box-shadow: 0 0 20px rgba(0,0,0,.2);
+      color: #dc3545;
+
+    }
+
+  }
+
+}
+
+.pins-container.active {
+
+  border: 2px dashed #e0e0e0;
+
+}

@@ -8,9 +8,11 @@ import { FireAgentService } from './fire-agent.service';
 @Injectable()
 export class StorageService {
 
-  public pinsChanged: Subject<PinIdentity[]> = new Subject<PinIdentity[]>();
+  public pinIdsChanged: Subject<PinIdentity[]> = new Subject<PinIdentity[]>();
+  public pinsChanged: Subject<Pin[]> = new Subject<Pin[]>();
 
   private _pinIds: PinIdentity[] = [];
+  private _pins: Pin[] = [];
 
   constructor(
     private fireAgent: FireAgentService
@@ -18,21 +20,36 @@ export class StorageService {
 
   public init(): void {
 
-    this.fireAgent.pinsChanged.subscribe((pinIds) => {
+    this.fireAgent.pinIdsChanged.subscribe((data) => {
 
       const identities: PinIdentity[] = [];
 
-      for ( const id in pinIds ) {
+      for ( const id in data ) {
 
         identities.push({
           id: +id,
-          key: pinIds[id]
+          key: data[id]
         });
 
       }
 
-      this.pinsChanged.next(identities);
+      this.pinIdsChanged.next(identities);
       this._pinIds = identities;
+
+    });
+
+    this.fireAgent.pinsChanged.subscribe((data) => {
+
+      const pins: Pin[] = [];
+
+      for ( const key in data ) {
+
+        pins.push(data[key]);
+
+      }
+
+      this.pinsChanged.next(pins);
+      this._pins = pins;
 
     });
 
@@ -44,9 +61,42 @@ export class StorageService {
 
   }
 
+  public get pins(): Pin[] {
+
+    return this._pins.slice();
+
+  }
+
   public pinSeries(pin: Pin): Promise<void> {
 
     return this.fireAgent.savePin(pin);
+
+  }
+
+  public repin(pins: Pin[]): Promise<void> {
+
+    return this.fireAgent.repin(pins, this._pinIds);
+
+  }
+
+  public updatePin(pin: Pin): Promise<void> {
+
+    let key: string;
+
+    this._pinIds.map((id: PinIdentity) => {
+
+      if ( id.id === pin.id ) key = id.key;
+
+    });
+
+    if ( ! key ) {
+
+      console.error('Cannot find the pin key using the pin ID! The pins map is misaligned with the pins data!');
+      return Promise.reject(null);
+
+    }
+
+    return this.fireAgent.updatePin(key, pin);
 
   }
 

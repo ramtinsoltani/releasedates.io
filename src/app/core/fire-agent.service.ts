@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
+import * as _ from 'lodash';
 import { Subject } from 'rxjs/Subject';
+import * as firebaseKey from 'firebase-key';
 
-import { Pin, FirebaseUser } from '@models';
+import { Pin, PinIdentity, FirebaseUser } from '@models';
 
 import { AuthService } from './auth.service';
 
 @Injectable()
 export class FireAgentService {
 
+  public pinIdsChanged: Subject<any> = new Subject<any>();
   public pinsChanged: Subject<any> = new Subject<any>();
+
   private idsRef: firebase.database.Reference = null;
-  private isListenerAttached: boolean = false;
+  private pinsRef: firebase.database.Reference = null;
+  private isIdsListenerAttached: boolean = false;
+  private isPinsListenerAttached: boolean = false;
 
   constructor(
     private auth: AuthService
@@ -21,38 +27,73 @@ export class FireAgentService {
 
     this.auth.userChanged.subscribe((user: FirebaseUser) => {
 
-      // Detach listener
-      if ( this.idsRef && this.isListenerAttached && ( ! user || user.anonymous ) ) {
-
-        this.idsRef.off();
-        this.isListenerAttached = false;
-
-      }
-
-      // Undefine ref
+      // If not authenticated or anonymous
       if ( ! user || user.anonymous ) {
 
+        // Detach IDs listeners
+        if ( this.idsRef && this.isIdsListenerAttached ) {
+
+          this.idsRef.off();
+          this.isIdsListenerAttached = false;
+
+        }
+
+        // Detach Pins listeners
+        if ( this.pinsRef && this.isPinsListenerAttached ) {
+
+          this.pinsRef.off();
+          this.isPinsListenerAttached = false;
+
+        }
+
+        // Undefine refs
         this.idsRef = null;
+        this.pinsRef = null;
+        this.pinIdsChanged.next(null);
         this.pinsChanged.next(null);
 
       }
 
-      // Define ref
-      if ( ! this.idsRef && user && ! user.anonymous ) {
+      // If authenticated and not anonymous
+      if ( user && ! user.anonymous ) {
 
-        this.idsRef = firebase.database().ref(`/pins/${this.auth.user.firebaseUID}/ids`);
+        // Define IDs refs
+        if ( ! this.idsRef ) {
 
-      }
+          this.idsRef = firebase.database().ref(`/pins/${this.auth.user.firebaseUID}/ids`);
 
-      // Attach listener
-      if ( ! this.isListenerAttached && this.idsRef && user && ! user.anonymous ) {
+        }
 
-        this.isListenerAttached = true;
-        this.idsRef.on('value', (ids: firebase.database.DataSnapshot) => {
+        // Define Pins refs
+        if ( ! this.pinsRef ) {
 
-          this.pinsChanged.next(ids.val());
+          this.pinsRef = firebase.database().ref(`/pins/${this.auth.user.firebaseUID}/data`);
 
-        });
+        }
+
+        // Attach IDs listeners
+        if ( ! this.isIdsListenerAttached && this.idsRef ) {
+
+          this.isIdsListenerAttached = true;
+          this.idsRef.on('value', (ids: firebase.database.DataSnapshot) => {
+
+            this.pinIdsChanged.next(ids.val());
+
+          });
+
+        }
+
+        // Attach Pins listeners
+        if ( ! this.isPinsListenerAttached && this.pinsRef ) {
+
+          this.isPinsListenerAttached = true;
+          this.pinsRef.on('value', (pins: firebase.database.DataSnapshot) => {
+
+            this.pinsChanged.next(pins.val());
+
+          });
+
+        }
 
       }
 
@@ -65,28 +106,106 @@ export class FireAgentService {
     return new Promise((resolve, reject) => {
 
       if ( ! this.auth.isUserLoggedin() || this.auth.isUserAnonymous() || (! this.auth.user.emailVerified && ! this.auth.user.facebook) ) {
-console.log('DENIED')
+
         reject();
         return;
 
       }
 
-      const pinRef = firebase.database().ref(`/pins/${this.auth.user.firebaseUID}/data`).push(pin);
+      const key = firebaseKey.key();
 
-      pinRef.then(() => {
+      firebase.database().ref(`/pins/${this.auth.user.firebaseUID}/data`).update({ [key]: pin })
+      .then(() => {
 
-        firebase.database().ref(`/pins/${this.auth.user.firebaseUID}/ids`).update({ [pin.id]: pinRef.key })
-        .then(() => {
+        return firebase.database().ref(`/pins/${this.auth.user.firebaseUID}/ids`).update({ [pin.id]: key });
 
-          resolve();
+      })
+      .then(() => {
 
-        })
-        .catch((error) => {
+        resolve();
 
-          console.error(error);
-          reject();
+      })
+      .catch((error) => {
 
-        });
+        console.error(error);
+        reject();
+
+      });
+
+    });
+
+  }
+
+  public repin(pins: Pin[], identities: PinIdentity[]): Promise<void> {
+
+    return new Promise((resolve, reject) => {
+
+      if ( ! this.auth.isUserLoggedin() || this.auth.isUserAnonymous() || (! this.auth.user.emailVerified && ! this.auth.user.facebook) ) {
+
+        reject();
+        return;
+
+      }
+
+      const newPins = {};
+      const newIdentities = {};
+
+      for ( const pin of pins ) {
+
+        const key = firebaseKey.key();
+
+        newPins[key] = pin;
+        newIdentities[pin.id] = key;
+
+      }
+
+      firebase.database()
+      .ref(`/pins/${this.auth.user.firebaseUID}/data`)
+      .set(newPins)
+      .then(() => {
+
+        return firebase.database().ref(`/pins/${this.auth.user.firebaseUID}/ids`).set(newIdentities);
+
+      })
+      .then(() => {
+
+        resolve();
+
+      })
+      .catch((error) => {
+
+        console.error(error);
+        reject();
+
+      });
+
+    });
+
+  }
+
+  public updatePin(key: string, pin: Pin): Promise<void> {
+
+    return new Promise((resolve, reject) => {
+
+      if ( ! this.auth.isUserLoggedin() || this.auth.isUserAnonymous() || (! this.auth.user.emailVerified && ! this.auth.user.facebook) ) {
+
+        reject();
+        return;
+
+      }
+
+      firebase.database()
+      .ref(`/pins/${this.auth.user.firebaseUID}/data/${key}`)
+      .update(pin)
+      .then(() => {
+
+        resolve();
+
+      })
+      .catch((error) => {
+
+        console.error(error);
+        reject();
 
       });
 
@@ -99,7 +218,7 @@ console.log('DENIED')
     return new Promise((resolve, reject) => {
 
       if ( ! this.auth.isUserLoggedin() || this.auth.isUserAnonymous() || (! this.auth.user.emailVerified && ! this.auth.user.facebook) ) {
-console.log('DENIED')
+
         reject();
         return;
 

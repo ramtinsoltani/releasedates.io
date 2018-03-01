@@ -4,7 +4,8 @@ import {
   HttpInterceptor,
   HttpRequest,
   HttpHandler,
-  HttpEvent
+  HttpEvent,
+  HttpParams
 } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -40,8 +41,10 @@ export class BackendInterceptor implements HttpInterceptor {
       return this.auth.getToken()
       .mergeMap((token: string) => {
 
+        const params = new HttpParams({ fromString: req.params.toString() }).append('token', token);
+
         return next.handle(req.clone({
-          params: req.params.append('token', token)
+          params: params
         }));
 
       });
@@ -57,8 +60,10 @@ export class BackendInterceptor implements HttpInterceptor {
       })
       .mergeMap((token: string) => {
 
+        const params = new HttpParams({ fromString: req.params.toString() }).append('token', token);
+
         return next.handle(req.clone({
-          params: req.params.append('token', token)
+          params: params
         }));
 
       });

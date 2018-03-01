@@ -1,0 +1,29 @@
+.pin-new-episode {
+  $dotSize: 10px;
+  min-width: $dotSize;
+  min-height: $dotSize;
+  max-width: $dotSize;
+  max-height: $dotSize;
+  margin-top: 2px;
+  background-color: #ffc107;
+}
+
+.pin-option {
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+
+  &:hover > svg {
+    fill: #dc3545;
+    stroke: #dc3545;
+  }
+
+  & > svg {
+    fill: #6c757d;
+    stroke: #6c757d;
+    width: 16px;
+    height: 16px;
+    transition: fill .2s ease-in-out, stroke .2s ease-in-out;
+  }
+
+}

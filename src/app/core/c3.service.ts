@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {
   MonthNames,
   Episode,
+  EpisodeSummary,
   Season
 } from '@models';
 
@@ -47,7 +48,7 @@ export class C3Service {
 
   }
 
-  public isEpisodeUpcoming(episode: Episode): boolean {
+  public isEpisodeUpcoming(episode: Episode | EpisodeSummary): boolean {
 
     if ( ! episode.airDate ) return false;
 

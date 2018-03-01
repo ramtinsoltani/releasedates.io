@@ -57,3 +57,19 @@ export interface VideosResult {
   thumbnail: string;
 
 }
+
+export interface EpisodeSummary {
+
+  number: number;
+  hasName: boolean;
+  airDate: string;
+
+}
+
+export interface Update {
+
+  hasUpdates: boolean;
+  lastUpdated?: number;
+  episodes?: EpisodeSummary[];
+
+}

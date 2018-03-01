@@ -101,7 +101,7 @@ export class SeriesDetailsComponent implements OnInit, OnDestroy {
 
     this.checkIsPinned(this.storage.pinIds);
 
-    this.pinIdsSubscription = this.storage.pinsChanged.subscribe((ids: PinIdentity[]) => {
+    this.pinIdsSubscription = this.storage.pinIdsChanged.subscribe((ids: PinIdentity[]) => {
 
       this.checkIsPinned(ids);
 
