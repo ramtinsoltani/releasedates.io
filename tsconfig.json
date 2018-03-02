@@ -21,6 +21,7 @@
       "@components": ["app/.aliases/components"],
       "@routers": ["app/.aliases/routers"],
       "@services": ["app/.aliases/services"],
+      "@core/services/*": ["app/core/@services/*.service"],
       "@models": ["app/.aliases/models"],
       "@interceptors": ["app/.aliases/interceptors"]
     }

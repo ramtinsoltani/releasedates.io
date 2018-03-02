@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Input,
+  HostListener
+} from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import {
@@ -181,6 +187,8 @@ export class SeriesDetailsComponent implements OnInit, OnDestroy {
 
   public onPinUnpin(): void {
 
+    if ( this.isPinningPending || this.isPinningDisabled ) return;
+
     this.isPinningPending = true;
 
     if ( this.isPinned ) {
@@ -217,6 +225,19 @@ export class SeriesDetailsComponent implements OnInit, OnDestroy {
         this.isPinningPending = false;
 
       });
+
+    }
+
+  }
+
+  @HostListener('window: keyup', ['$event'])
+  private shortcuts(event: KeyboardEvent): void {
+
+    if ( event.target instanceof HTMLInputElement ) return;
+
+    if ( event.key.toLowerCase() === 'p' && event.shiftKey ) {
+
+      this.onPinUnpin();
 
     }
 

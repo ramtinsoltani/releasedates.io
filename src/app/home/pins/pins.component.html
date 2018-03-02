@@ -1,15 +1,17 @@
-<ng-template [ngIf]="pins.length">
-  <div class="row">
-    <div class="col-12">
-      <h3 class="text-center">Pinned TV Shows</h3>
-      <hr>
+<div class="row" *ngIf="pins.length">
+  <div class="col-12 rounded py-3 mb-5 pins-back">
+    <div class="row">
+      <div class="col-12">
+        <h3 class="text-center display-4">Pinned TV Shows</h3>
+        <hr>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <div class="pins-container rounded" [ngClass]="{ active: isDragging }" [dragula]="'pinsContainer'" [dragulaModel]="pins">
-        <app-pin *ngFor="let pin of pins" [pin]="pin" class="card" data-id="{{ pin.id }}"></app-pin>
+    <div class="row">
+      <div class="col-12">
+        <div class="pins-container rounded" [ngClass]="{ active: isDragging }" [dragula]="'pinsContainer'" [dragulaModel]="pins">
+          <app-pin *ngFor="let pin of pins" [pin]="pin" class="card" data-id="{{ pin.id }}"></app-pin>
+        </div>
       </div>
     </div>
   </div>
-</ng-template>
+</div>

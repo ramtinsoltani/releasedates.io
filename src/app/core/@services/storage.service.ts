@@ -3,7 +3,7 @@ import { Subject } from 'rxjs/Subject';
 
 import { Pin, PinIdentity } from '@models';
 
-import { FireAgentService } from './fire-agent.service';
+import { FireAgentService } from '@core/services/fire-agent';
 
 @Injectable()
 export class StorageService {

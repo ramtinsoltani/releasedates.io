@@ -1,11 +1,16 @@
+.pins-back {
+
+  background-color: #f7f7f7;
+  border: 1px solid #e0e0e0;
+
+}
+
 .pins-container {
 
-  min-height: 300px;
   width: 100%;
   border: none;
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
 
   &>.card {

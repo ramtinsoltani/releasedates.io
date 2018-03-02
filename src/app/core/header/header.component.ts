@@ -2,8 +2,6 @@ import {
   Component,
   OnInit,
   OnDestroy,
-  ViewChild,
-  ElementRef,
   NgZone
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -51,9 +49,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   }
 
-  public onFind(value: string): void {
+  public onFind(element: HTMLInputElement): void {
 
-    if ( value && value.trim() ) this.router.navigate(['/search'], { queryParams: { q: value.trim() } });
+    if ( element.value && element.value.trim() ) {
+
+      this.router.navigate(['/search'], { queryParams: { q: element.value.trim() } });
+      element.value = null;
+
+    }
 
   }
 

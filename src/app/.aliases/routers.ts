@@ -1,4 +1,4 @@
-export { CoreRouterModule } from '../core/core-router.module';
-export { AuthRouterModule } from '../auth/auth-router.module';
-export { SeriesRouterModule } from '../series/series-router.module';
-export { SearchRouterModule } from '../search/search-router.module';
+export { CoreRouterModule } from '../core/@router/core.router';
+export { AuthRouterModule } from '../auth/@router/auth.router';
+export { SeriesRouterModule } from '../series/@router/series.router';
+export { SearchRouterModule } from '../search/@router/search.router';

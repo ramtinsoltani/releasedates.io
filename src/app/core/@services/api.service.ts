@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Md5 } from 'ts-md5/dist/md5';
-import * as credentials from '../../credentials.json';
+import * as credentials from '../../../credentials.json';
 
 import {
   SearchResult,

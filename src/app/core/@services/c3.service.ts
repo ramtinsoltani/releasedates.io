@@ -56,7 +56,7 @@ export class C3Service {
     for ( const series of discovered ) {
 
       if ( series.name ) sanitized.push(series);
-      
+
     }
 
     return sanitized;
@@ -72,10 +72,7 @@ export class C3Service {
     const date = episode.airDate.substr(8, 2);
 
     const airDate = new Date(+year, +month - 1, +date);
-    const today = new Date();
-
-    airDate.setHours(0, 0, 0);
-    today.setHours(0, 0, 0);
+    const today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
 
     return airDate.getTime() >= today.getTime();
 

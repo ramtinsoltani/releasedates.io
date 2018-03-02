@@ -11,9 +11,9 @@ import {
   imports: [
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
-      { path: 'search', loadChildren: '../search/search.module#SearchModule' },
-      { path: 'auth', loadChildren: '../auth/auth.module#AuthModule' },
-      { path: 'series', loadChildren: '../series/series.module#SeriesModule' },
+      { path: 'search', loadChildren: '../../search/search.module#SearchModule' },
+      { path: 'auth', loadChildren: '../../auth/auth.module#AuthModule' },
+      { path: 'series', loadChildren: '../../series/series.module#SeriesModule' },
       { path: 'privacy', component: PrivacyComponent },
       { path: '**', component: NotFoundComponent }
     ], { preloadingStrategy: PreloadAllModules })

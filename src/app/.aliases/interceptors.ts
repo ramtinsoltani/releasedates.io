@@ -1,1 +1,1 @@
-export { BackendInterceptor } from '../core/backend.interceptor';
+export { BackendInterceptor } from '../core/@interceptors/backend.interceptor';

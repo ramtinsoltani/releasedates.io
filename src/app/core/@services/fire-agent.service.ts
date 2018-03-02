@@ -6,7 +6,7 @@ import * as firebaseKey from 'firebase-key';
 
 import { Pin, PinIdentity, FirebaseUser } from '@models';
 
-import { AuthService } from './auth.service';
+import { AuthService } from '@core/services/auth';
 
 @Injectable()
 export class FireAgentService {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 import {
   Discovered
@@ -26,6 +26,15 @@ export class DiscoverComponent implements OnInit {
 
   ngOnInit() {
 
+    this.loadDiscover();
+
+  }
+
+  private loadDiscover(): void {
+
+    if ( this.pending ) return;
+
+    this.discovered = [];
     this.pending = true;
 
     this.api.backendDiscover(50)
@@ -40,6 +49,19 @@ export class DiscoverComponent implements OnInit {
       this.pending = false;
 
     });
+
+  }
+
+  @HostListener('window: keyup', ['$event'])
+  private shortcuts(event: KeyboardEvent): void {
+
+    if ( event.target instanceof HTMLInputElement ) return;
+
+    if ( event.key.toLowerCase() === 'r' && event.shiftKey ) {
+
+      this.loadDiscover();
+
+    }
 
   }
 

@@ -4,6 +4,12 @@ html, body {
   top: 0;
 }
 
+@-moz-document url-prefix() {
+  html, body {
+    height: calc(100% - 120px);
+  }
+}
+
 a, a:hover {
   color: #dc3545;
 }
