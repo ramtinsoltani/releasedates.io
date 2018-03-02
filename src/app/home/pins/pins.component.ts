@@ -1,6 +1,13 @@
 import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
+import {
+  trigger,
+  transition,
+  style,
+  animate
+} from '@angular/animations';
+
 import { DragulaService } from 'ng2-dragula';
 
 import { PinComponent } from '@components';
@@ -19,7 +26,18 @@ import {
 @Component({
   selector: 'app-pins',
   templateUrl: './pins.component.html',
-  styleUrls: ['./pins.component.scss']
+  styleUrls: ['./pins.component.scss'],
+  animations: [
+    trigger('fadeAnimation', [
+      transition('void => *', [
+        style({ opacity: 0 }),
+        animate(500, style({ opacity: 1 }))
+      ]),
+      transition('* => void', [
+        animate(500, style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class PinsComponent implements OnInit, OnDestroy {
 

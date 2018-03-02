@@ -1,6 +1,13 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 
 import {
+  trigger,
+  transition,
+  style,
+  animate
+} from '@angular/animations';
+
+import {
   Discovered
 } from '@models';
 
@@ -12,7 +19,18 @@ import {
 @Component({
   selector: 'app-discover',
   templateUrl: './discover.component.html',
-  styleUrls: ['./discover.component.scss']
+  styleUrls: ['./discover.component.scss'],
+  animations: [
+    trigger('fadeAnimation', [
+      transition('void => *', [
+        style({ opacity: 0 }),
+        animate(500, style({ opacity: 1 }))
+      ]),
+      transition('* => void', [
+        animate(500, style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class DiscoverComponent implements OnInit {
 
