@@ -108,6 +108,7 @@ export class C3Service {
   public getSeasonYear(episodes: Episode[]): string {
 
     const years = [];
+    const range = [];
 
     for ( const episode of episodes ) {
 
@@ -115,7 +116,10 @@ export class C3Service {
 
     }
 
-    return years.join('-');
+    range.push(Math.min(...years));
+    range.push(Math.max(...years));
+
+    return range.join('-');
 
   }
 

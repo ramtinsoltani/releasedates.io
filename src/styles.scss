@@ -1,12 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 html, body {
-  height: calc(100% - 150px);
+  height: calc(100% - 200px);
   top: 0;
 }
 
 @-moz-document url-prefix() {
   html, body {
-    height: calc(100% - 120px);
+    height: calc(100% - 170px);
   }
 }
 
