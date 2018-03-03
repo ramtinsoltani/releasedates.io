@@ -10,6 +10,17 @@ ReleaseDates.io is a Single Page Application created with Angular 5 + Typescript
 
 This web app is currently live at <http://releasedates.s3-website-us-west-1.amazonaws.com>.
 
+# Screenshots
+
+<div style="text-align: center;">
+![Screenshot 1](./screenshots/1.jpg)<br><br>
+![Screenshot 2](./screenshots/2.jpg)<br><br>
+![Screenshot 3](./screenshots/3.jpg)<br><br>
+![Screenshot 4](./screenshots/4.jpg)<br><br>
+![Screenshot 5](./screenshots/5.jpg)<br><br>
+![Screenshot 6](./screenshots/6.jpg)
+</div>
+
 # Building Locally
 
 **Before building the web app, make sure you read the [License Agreement](./LICENSE) and the following to make sure we are on the same page:**
