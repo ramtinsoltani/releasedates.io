@@ -24,12 +24,28 @@ export class PinComponent implements OnInit {
   @Input('pin')
   public pin: Pin;
 
+  public imageError: boolean = false;
+
   constructor(
     private storage: StorageService,
     private router: Router
   ) { }
 
   ngOnInit() { }
+
+  public onImageError(): void {
+
+    this.imageError = true;
+
+  }
+
+  public getThumbnail(): string {
+
+    if ( this.pin.thumbnail && ! this.imageError ) return this.pin.thumbnail;
+
+    return '/assets/placeholder.jpg';
+
+  }
 
   public onPinClick(): void {
 

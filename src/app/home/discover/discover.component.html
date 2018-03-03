@@ -6,8 +6,8 @@
 <div class="row">
   <div class="col-12">
     <div class="cards-container">
-      <div *ngFor="let series of discovered" class="card cursor-link" routerLink="/series/{{ series.id }}" @fadeAnimation>
-        <img [src]="series.posters[0].thumbnail ? series.posters[0].thumbnail : '/assets/placeholder.jpg'" class="card-img-top img-fluid">
+      <div *ngFor="let series of discovered; let index = index" class="card cursor-link" routerLink="/series/{{ series.id }}" @fadeAnimation>
+        <img [src]="getThumbnail(series.posters[0].thumbnail, index)" (error)="onImageError(index)" class="card-img-top img-fluid">
         <div class="card-body d-flex align-items-center justify-content-center">
           <h5 class="card-title m-0 text-center">{{ series.name }}</h5>
         </div>

@@ -17,7 +17,7 @@
         </svg>
       </div>
       <div class="col-4 d-flex justify-content-end align-items-center text-light flex-column">
-        <a *ngIf="posters[0].poster" [href]="posters[selectedPoster].poster" target="_blank">
+        <a *ngIf="posters[0].poster && ! imageErrors[selectedPoster]" [href]="posters[selectedPoster].poster" target="_blank">
           <svg class="mb-2" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" width="32" height="40">
             <filter id="dropshadow3" height="130%">
               <feGaussianBlur in="SourceAlpha" stdDeviation="20"/>
@@ -59,7 +59,7 @@
     </div>
     <div class="row w-100 m-0" style="z-index: 0;">
       <div class="col-12 text-center p-0">
-        <img [src]="getSelectedPoster()" class="img-fluid rounded m-auto">
+        <img [src]="getSelectedPoster()" (error)="onImageError()" class="img-fluid rounded m-auto">
       </div>
     </div>
     <div class="row">

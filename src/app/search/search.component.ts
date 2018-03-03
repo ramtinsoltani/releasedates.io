@@ -44,6 +44,7 @@ export class SearchComponent implements OnInit {
   public showError: boolean = false;
   public searchQuery: string = '';
   public pending: boolean = false;
+  public imageErrors = {};
 
   constructor(
     private api: ApiService,
@@ -76,6 +77,20 @@ export class SearchComponent implements OnInit {
       });
 
     });
+
+  }
+
+  public getThumbnail(index: number): string {
+
+    if ( this.results[index].posters[0].thumbnail && ! this.imageErrors[index] ) return this.results[index].posters[0].thumbnail;
+
+    return '/assets/placeholder.jpg';
+
+  }
+
+  public onImageError(index: number): void {
+
+    this.imageErrors[index] = true;
 
   }
 

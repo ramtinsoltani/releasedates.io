@@ -36,6 +36,7 @@ export class DiscoverComponent implements OnInit {
 
   public discovered: Discovered[] = [];
   public pending: boolean = false;
+  public imageErrors = {};
 
   constructor(
     private api: ApiService,
@@ -67,6 +68,20 @@ export class DiscoverComponent implements OnInit {
       this.pending = false;
 
     });
+
+  }
+
+  public getThumbnail(thumbnail: string, index: number): string {
+
+    if ( ! this.imageErrors[index] && thumbnail ) return thumbnail;
+
+    return '/assets/placeholder.jpg';
+
+  }
+
+  public onImageError(index: number): void {
+
+    this.imageErrors[index] = true;
 
   }
 

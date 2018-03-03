@@ -88,6 +88,7 @@ export class SeriesDetailsComponent implements OnInit, OnDestroy {
   public isPinned: boolean = false;
   public authSubscription: Subscription;
   public pinIdsSubscription: Subscription;
+  public imageErrors = {};
 
   constructor(
     private storage: StorageService,
@@ -133,13 +134,19 @@ export class SeriesDetailsComponent implements OnInit, OnDestroy {
 
   public getSelectedPoster(): string {
 
-    if ( ! this.posters[0].poster ) {
+    if ( ! this.posters[0].poster || this.imageErrors[this.selectedPoster] ) {
 
       return '/assets/placeholder.jpg';
 
     }
 
     return this.posters[this.selectedPoster].poster;
+
+  }
+
+  public onImageError(): void {
+
+    this.imageErrors[this.selectedPoster] = true;
 
   }
 

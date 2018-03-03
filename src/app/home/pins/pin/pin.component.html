@@ -1,4 +1,4 @@
-<img [src]="pin.thumbnail ? pin.thumbnail : '/assets/placeholder.jpg'" class="card-img-top img-fluid cursor-link" (click)="onPinClick()">
+<img [src]="getThumbnail()" (error)="onImageError()" class="card-img-top img-fluid cursor-link" (click)="onPinClick()">
 <div class="card-body d-flex align-items-center justify-content-center cursor-link" (click)="onPinClick()">
   <span *ngIf="pin.hasNewEpisode" class="pin-new-episode mr-2 rounded-circle"></span>
   <h5 class="card-title m-0 text-center">{{ pin.name }}</h5>
