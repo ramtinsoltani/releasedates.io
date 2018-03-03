@@ -2,6 +2,7 @@
 
 # credentials
 /src/credentials.json
+/firebase-rules.json
 
 # compiled output
 /dist

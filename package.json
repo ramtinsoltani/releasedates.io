@@ -1,7 +1,7 @@
 {
   "name": "releasedates.io",
   "version": "0.0.0",
-  "license": "MIT",
+  "license": "SEE LICENSE IN <LICENSE>",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
