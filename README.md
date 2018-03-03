@@ -12,14 +12,12 @@ This web app is currently live at <http://releasedates.s3-website-us-west-1.amaz
 
 # Screenshots
 
-<div style="text-align: center;">
-![Screenshot 1](https://github.com/ramtinsoltani/releasedates.io/blob/master/screenshots/1.jpg)<br><br>
-![Screenshot 2](https://github.com/ramtinsoltani/releasedates.io/blob/master/screenshots/2.jpg)<br><br>
-![Screenshot 3](https://github.com/ramtinsoltani/releasedates.io/blob/master/screenshots/3.jpg)<br><br>
-![Screenshot 4](https://github.com/ramtinsoltani/releasedates.io/blob/master/screenshots/4.jpg)<br><br>
-![Screenshot 5](https://github.com/ramtinsoltani/releasedates.io/blob/master/screenshots/5.jpg)<br><br>
-![Screenshot 6](https://github.com/ramtinsoltani/releasedates.io/blob/master/screenshots/6.jpg)
-</div>
+![Screenshot 1](./screenshots/1.jpg)<br><br>
+![Screenshot 2](./screenshots/2.jpg)<br><br>
+![Screenshot 3](./screenshots/3.jpg)<br><br>
+![Screenshot 4](./screenshots/4.jpg)<br><br>
+![Screenshot 5](./screenshots/5.jpg)<br><br>
+![Screenshot 6](./screenshots/6.jpg)
 
 # Building Locally
 
