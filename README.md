@@ -34,19 +34,19 @@ To build this SPA locally, make sure you have checked all the prerequisites and 
   4. Run `npm install` to install all the dependencies
   5. Create a new file called `credentials.json` in the `src` directory and fill it with your Firebase web credentials and the address of the backend like below:
   ```json
-    {
-      "firebase": {
-        "apiKey": "...",
-        "authDomain": "...",
-        "databaseURL": "...",
-        "projectId": "...",
-        "storageBucket": "...",
-        "messagingSenderId": "..."
-      },
-      "backend": {
-        "url": "http://localhost:3000"
-      }
+  {
+    "firebase": {
+      "apiKey": "...",
+      "authDomain": "...",
+      "databaseURL": "...",
+      "projectId": "...",
+      "storageBucket": "...",
+      "messagingSenderId": "..."
+    },
+    "backend": {
+      "url": "http://localhost:3000"
     }
+  }
   ```
   6. Start the backend server by running `node index.js`
   7. Run `ng serve` to build the SPA
