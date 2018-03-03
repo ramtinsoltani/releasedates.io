@@ -12,8 +12,11 @@ This web app is currently live at <http://releasedates.s3-website-us-west-1.amaz
 
 # Building Locally
 
-**Before building the web app, make sure you read the [License Agreement](./LICENSE) to make sure we are on the same page.**
-
+**Before building the web app, make sure you read the [License Agreement](./LICENSE) and the following to make sure we are on the same page:**
+  - You may use the live version of the web app or build one locally in anyway you see fit.
+  - You may modify the code, either for contribution or personal use.
+  - You may not host the web app online or distribute the web app, either for commercial or personal use.
+---
 To build this SPA locally, make sure you have checked all the prerequisites and follow the instructions below.
 
 ## Prerequisites
