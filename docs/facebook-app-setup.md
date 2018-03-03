@@ -8,6 +8,6 @@
 5. Under **Facebook Login**, select **Settings**.
 6. Copy the **OAuth Redirect URI** from Firebase Facebook Sign-In method window (where you entered your App ID and Secret) and add it to **Valid OAuth redirect URIs**.
 7. If anyone but you is going to use the web app, you need to make your Facebook app go live:
-  - Host the `privacy.html` file in the repo's root somewhere (you can use [GitHub Pages](https://pages.github.com/), or [Firebase free hosting](https://firebase.google.com/docs/hosting/)).
-  - Add the URL of the privacy file in **Settings > Basic** under **Privacy Policy URL**.
-  - Switch your app status to Live on top of the screen.
+    1. Host the `privacy.html` file in the repo's root somewhere (you can use [GitHub Pages](https://pages.github.com/), or [Firebase free hosting](https://firebase.google.com/docs/hosting/)).
+    2. Add the URL of the privacy file in **Settings > Basic** under **Privacy Policy URL**.
+    3. Switch your app status to Live on top of the screen.
