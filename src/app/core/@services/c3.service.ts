@@ -116,8 +116,11 @@ export class C3Service {
 
     }
 
-    range.push(Math.min(...years));
-    range.push(Math.max(...years));
+    const min = Math.min(...years);
+    const max = Math.max(...years);
+
+    range.push(min);
+    if ( min !== max ) range.push(max);
 
     return range.join('-');
 
