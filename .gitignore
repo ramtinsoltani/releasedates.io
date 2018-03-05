@@ -1,5 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# hosting
+/hosting
+mode-switch.js
+
 # credentials
 /src/credentials.json
 /firebase-rules.json

@@ -8,7 +8,7 @@ ReleaseDates.io is a Single Page Application created with Angular 5 + Typescript
   - Find streams on DailyMotion
   - And pin their favorite TV Shows to track for new episodes
 
-This web app is currently live at <http://releasedates.s3-website-us-west-1.amazonaws.com>.
+This web app is currently live at <https://ramt.in>.
 
 # Screenshots
 

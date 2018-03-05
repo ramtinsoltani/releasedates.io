@@ -8,7 +8,8 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "node mode-switch --prod && ng build --prod --aot --output-path ./hosting/dist && cd hosting && firebase deploy && cd .. && node mode-switch --dev"
   },
   "private": true,
   "dependencies": {
