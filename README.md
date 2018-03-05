@@ -90,4 +90,4 @@ These features are easy to miss:
 
 # Contribution
 
-Any contributions through [Pull Requests](https://github.com/ramtinsoltani/releasedates.io/pulls) are welcomed. Also, if you have a feature request or found a bug in the web app, use the [Issues](https://github.com/ramtinsoltani/releasedates.io/issues) page to let me know.
+Any contributions through [Pull Requests](https://github.com/ramtinsoltani/releasedates.io/pulls) are welcome. Also, if you have a feature request or found a bug in the web app, use the [Issues](https://github.com/ramtinsoltani/releasedates.io/issues) page to let me know.
